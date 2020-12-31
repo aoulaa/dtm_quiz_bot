@@ -11,8 +11,8 @@ async def test():
     await db.gino.create_all()
 
     print("Добавляем пользователей")
-    await commands.add_question(1, "i ... from Russia", 'am', 'is,are,has')
-    await commands.add_question(2, "you ... my friend", 'are', 'is,am,have')
+    await commands.add_question(1, "present_simple", "i ... from Russia", 'am', 'is,are,has')
+    await commands.add_question(2,"present_simple", "you ... my friend", 'are', 'is,am,have')
     # await commands.add_question(3, "1")
     # await commands.add_question(4, "1")
     # await commands.add_question(5, "John")
