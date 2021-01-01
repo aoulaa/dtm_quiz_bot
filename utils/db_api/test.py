@@ -12,11 +12,13 @@ async def test():
 
     print("Добавляем пользователей")
     await commands.add_question(1, "present_simple", "i ... from Russia", 'am', 'is,are,has')
-    await commands.add_question(2,"present_simple", "you ... my friend", 'are', 'is,am,have')
+    await commands.add_question(2, "present_simple", "you ... my friend", 'are', 'is,am,have')
     # await commands.add_question(3, "1")
     # await commands.add_question(4, "1")
     # await commands.add_question(5, "John")
     print("Готово")
+    quest = await commands.select_question_by_topic('present_simple')
+    print(f'questions by topics:{quest}')
 
     questions = await commands.select_all_question()
     print(f"Получил всех пользователей: {questions}")

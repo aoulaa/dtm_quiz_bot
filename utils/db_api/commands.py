@@ -23,6 +23,11 @@ async def add_question(id: int, topic: str, questions: str, right_answer: str, w
         pass
 
 
+async def select_question_by_topic(topics):
+    questions = await Questions.query.where(Questions.topic == topics).gino.all()
+    return questions
+
+
 async def select_all_question():
     question = await Questions.query.gino.all()
     return question
@@ -44,10 +49,11 @@ async def select_questions(id: int):
 
 
 async def count_users():
-    total = await db.func.count(Questions.id).gino.scalar()
+    total = await db.func.count(User.id).gino.scalar()
     return total
 
 
-# async def update_user_email(id, email):
-#     user = await Questions.get(id)
-#     await user.update(email=email).apply()
+async def count_questions():
+    total = await db.func.count(Questions.id).gino.scalar()
+    return total
+
