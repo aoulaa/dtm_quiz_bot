@@ -15,7 +15,7 @@ class User(TimedBaseModel):
 
 class Questions(TimedBaseModel):
     __tablename__ = 'Present_simple'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True)  # что можно делат чтобы сам поставил ид
     topic = Column(String(500))
     questions = Column(String(2000))
     right_answer = Column(String(100))

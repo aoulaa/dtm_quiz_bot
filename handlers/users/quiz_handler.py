@@ -1,10 +1,10 @@
-import asyncio
+
 import random
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-from aiogram.utils.markdown import quote_html
+
 
 from keyboards.inline.in_buttons import answer_kb
 from loader import dp
@@ -70,9 +70,10 @@ async def make_summary(answered):  # функция подсчет статис�
             if question.right_answer != value else f'{question.questions} ✔️\n\n'
         if question.right_answer == value:
             score += 1
-    r = question.topic
-    text += f"Out of 30/{str(score)} Topic: {r} "
-    return text
+    text += f"<b>Out of 30/{str(score)}</b>"
+    ready_text = f'<b>Theme:</b> {question.topic}\n\n{text}'
+    return ready_text
+
 # # пока пуст так останется позже перепишу нормално
 # @dp.callback_query_handler(text='present_simple_cb', state=Data.present_data)
 # async def get_questions(call: CallbackQuery, state: FSMContext):

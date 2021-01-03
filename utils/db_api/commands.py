@@ -16,9 +16,9 @@ async def add_user(id: int, name: str ):
         pass
 
 
-async def add_question(id: int, topic: str, questions: str, right_answer: str, wrong_answer: str):
+async def add_question(topic: str, questions: str, right_answer: str, wrong_answer: str):
     try:
-        question = Questions(id=id, topic=topic, questions=questions,
+        question = Questions(topic=topic, questions=questions,
                              right_answer=right_answer, wrong_answer=wrong_answer)
         await question.create()
 
