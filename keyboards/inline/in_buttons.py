@@ -1,12 +1,11 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-
 present_buttons = InlineKeyboardMarkup(
     row_width=2,
 
     inline_keyboard=[
         [
-            InlineKeyboardButton(text="Test 1", callback_data='test1_cb'),
+            InlineKeyboardButton(text="Test 1", callback_data='present_simple_cb'),
             InlineKeyboardButton(text="Test 2", callback_data='test2_cb')
         ],
         [
@@ -19,3 +18,13 @@ present_buttons = InlineKeyboardMarkup(
         ],
 
     ], resize_keyboard=True)
+
+
+def answer_kb(answers, question_id):
+    answer_buttons = [InlineKeyboardButton(text=answer, callback_data=(answer + ';' + str(question_id))) for answer in
+                      answers]
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        answer_buttons
+    ]
+    )
+    return kb
