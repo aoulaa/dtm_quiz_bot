@@ -7,6 +7,7 @@ class User(TimedBaseModel):
     __tablename__ = 'users'
     id = Column(BigInteger, primary_key=True)
     name = Column(String(100))
+    questions_ids = Column(Integer())
 
     referral = Column(BigInteger)
 
@@ -14,8 +15,8 @@ class User(TimedBaseModel):
 
 
 class Questions(TimedBaseModel):
-    __tablename__ = 'Present_simple'
-    id = Column(BigInteger, primary_key=True)  # что можно делат чтобы сам поставил ид
+    __tablename__ = 'tests'
+    id = Column(BigInteger, primary_key=True)
     topic = Column(String(500))
     questions = Column(String(2000))
     right_answer = Column(String(100))

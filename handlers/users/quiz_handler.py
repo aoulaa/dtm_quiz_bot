@@ -1,10 +1,8 @@
-
 import random
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-
 
 from keyboards.inline.in_buttons import answer_kb
 from loader import dp
@@ -20,11 +18,14 @@ dict_of_topics = {
 
 @dp.message_handler(text=dict_of_topics)
 async def send_present_q(message: types.Message, state: FSMContext):
-    question_p = await commands.select_question_by_topic(dict_of_topics[message.text])  # Здесь получаем список вопросов по теме
-    await state.update_data(questions_present=question_p)  # А тут обновляет данные в FSM
+    question_p = await commands.select_question_by_topic(
+        dict_of_topics[message.text])  # Здесь получаем список вопросов по теме
+    await state.update_data(questions_all=question_p)  # А тут обновляет данные в FSM
     await state.update_data(answered={})  # Здесь создадим пустой словарь, в который позже запишем ответы
     # await message.answer('Present simple', reply_markup=present_buttons)  # передаю инлайн кнопки
     await Data.present_data.set()
+    """add func here"""
+    """also get user id"""
     random.shuffle(question_p)  # Мешаем вопросы, чтобы выдать случайный вопрос из списка
     answers = question_p[0].wrong_answer.split(',')  # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
     answers.append(question_p[0].right_answer)
@@ -42,7 +43,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     answer, q_id = call.data.split(';')  # тут получаем коллбек дату и сразу распаковываем ее в ID и ответ.
     data = await state.get_data()  # Получаем данные из FSM
     answered = data.get('answered')
-    q_p = data.get('questions_present')
+    q_p = data.get('questions_all')
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
     if len(answered.keys()) == 5:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(answered)  # Считаем статистику. Функция корявая,
@@ -51,7 +52,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
         return
     while answered.get(str(q_p[0].id)):  # Тут рандомизируем список так, чтобы обращение к списку вопросов по [0]
         random.shuffle(q_p)  # возвращало вопрос, который еще не был задан пользователю.
-    await state.update_data(questions_present=q_p)
+    await state.update_data(questions_all=q_p)
     await state.update_data(answered=answered)
     answers = q_p[0].wrong_answer.split(',')
     answers.append(q_p[0].right_answer)
@@ -61,17 +62,22 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
 
 
 async def make_summary(answered):  # функция подсчет статистики.
-    global question
+    global question, value
     text = ''
     score = 0
     for key, value in answered.items():
         question = await commands.select_questions(int(key))
-        text += f'{question.questions} ❌ ({question.right_answer})\n\n'\
+        text += f'{question.questions} ❌ ({question.right_answer})\n\n' \
             if question.right_answer != value else f'{question.questions} ✔️\n\n'
+        print(key)
         if question.right_answer == value:
             score += 1
+        if question.right_answer == value:
+            await commands.add_user_with_id(int(key))
+
     text += f"<b>Out of 30/{str(score)}</b>"
     ready_text = f'<b>Theme:</b> {question.topic}\n\n{text}'
+
     return ready_text
 
 # # пока пуст так останется позже перепишу нормално

@@ -1,19 +1,25 @@
-from random import shuffle
-
-from aiogram import types
 from asyncpg import UniqueViolationError
 
 from utils.db_api.db_gino import db
 from utils.db_api.schemas.questions import Questions, User
 
 
-async def add_user(id: int, name: str ):
+async def add_user_with_id(questions_ids: int):
     try:
-        user = User(id=id, name=name)
+        user = User(questions_ids=questions_ids)
         await user.create()
 
     except UniqueViolationError:
         pass
+
+
+# async def add_question_id(questions_ids: int):
+#     try:
+#         user = User(questions_ids=questions_ids)
+#         await user.create()
+#
+#     except UniqueViolationError:
+#         pass
 
 
 async def add_question(topic: str, questions: str, right_answer: str, wrong_answer: str):
@@ -28,7 +34,7 @@ async def add_question(topic: str, questions: str, right_answer: str, wrong_answ
 
 async def select_question_by_topic(topics):
     questions = await Questions.query.where(Questions.topic == topics).gino.all()
-    return questions  # скажите почему возврашает объект
+    return questions
 
 
 async def select_all_question():
@@ -37,12 +43,17 @@ async def select_all_question():
 
 
 async def select_all_users():
-    users = await Questions.query.gino.all()
+    users = await User.query.gino.all()
     return users
 
 
 async def select_user(id: int):
     user = await User.query.where(User.id == id).gino.first()
+    return user
+
+
+async def select_questions_id(questions_ids: int):
+    user = await User.query.where(User.questions_ids == questions_ids).gino.all()
     return user
 
 
@@ -59,25 +70,3 @@ async def count_users():
 async def count_questions():
     total = await db.func.count(Questions.id).gino.scalar()
     return total
-
-
-def generate_markup(right_answer, wrong_answers):
-    """
-    Создаем кастомную клавиатуру для выбора ответа
-    :param right_answer: Правильный ответ
-    :param wrong_answers: Набор неправильных ответов
-    :return: Объект кастомной клавиатуры
-    """
-    markup = types.InlineKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-    # Склеиваем правильный ответ с неправильными
-    all_answers = '{},{}'.format(right_answer, wrong_answers)
-    # Создаем лист (массив) и записываем в него все элементы
-    list_items = []
-    for item in all_answers.split(','):
-        list_items.append(item)
-    # Хорошенько перемешаем все элементы
-    shuffle(list_items)
-    # Заполняем разметку перемешанными элементами
-    for item in list_items:
-        markup.add(item)
-    return markup
