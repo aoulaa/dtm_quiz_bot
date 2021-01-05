@@ -6,20 +6,20 @@ from utils.db_api.schemas.questions import Questions, User
 
 async def add_user_with_id(questions_ids: int):
     try:
-        user = User(questions_ids=questions_ids)
+        user = User( questions_ids=questions_ids)
         await user.create()
 
     except UniqueViolationError:
         pass
 
 
-# async def add_question_id(questions_ids: int):
-#     try:
-#         user = User(questions_ids=questions_ids)
-#         await user.create()
-#
-#     except UniqueViolationError:
-#         pass
+async def add_user_id(id: int):
+    try:
+        user = User(id=id)
+        await user.create()
+
+    except UniqueViolationError:
+        pass
 
 
 async def add_question(topic: str, questions: str, right_answer: str, wrong_answer: str):
