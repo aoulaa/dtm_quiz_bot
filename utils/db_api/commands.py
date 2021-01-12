@@ -4,28 +4,25 @@ from utils.db_api.db_gino import db
 from utils.db_api.schemas.questions import Questions, User
 
 
-async def add_user_with_id(questions_ids: int):
+async def add_user_with_id(id: int, number_times: str):
     try:
-        user = User( questions_ids=questions_ids)
+        user = User(id=id, number_times=number_times)
         await user.create()
 
     except UniqueViolationError:
         pass
 
 
-async def add_user_id(id: int):
-    try:
-        user = User(id=id)
-        await user.create()
-
-    except UniqueViolationError:
-        pass
+async def select_quest_id_by_user_id(use_id):
+    user = await User.query.where(User.id == use_id).gino.all()
+    return user
 
 
-async def add_question(topic: str, questions: str, right_answer: str, wrong_answer: str):
+async def add_question(topic: str, questions: str, right_answer: str, wrong_answer: str, explanation: str = None):
     try:
         question = Questions(topic=topic, questions=questions,
-                             right_answer=right_answer, wrong_answer=wrong_answer)
+                             right_answer=right_answer, wrong_answer=wrong_answer,
+                             explanation=explanation)
         await question.create()
 
     except UniqueViolationError:
@@ -70,3 +67,8 @@ async def count_users():
 async def count_questions():
     total = await db.func.count(Questions.id).gino.scalar()
     return total
+
+
+async def update_ques(id, number_times: str):
+    user = await User.get(id)
+    await user.update(number_times=number_times).apply()

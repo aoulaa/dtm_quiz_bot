@@ -5,9 +5,9 @@ from utils.db_api.db_gino import TimedBaseModel
 
 class User(TimedBaseModel):
     __tablename__ = 'users'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger)
     name = Column(String(100))
-    questions_ids = Column(Integer())
+    number_times = Column(String(20000))
 
     referral = Column(BigInteger)
 
@@ -21,6 +21,7 @@ class Questions(TimedBaseModel):
     questions = Column(String(2000))
     right_answer = Column(String(100))
     wrong_answer = Column(String(1000))
+    explanation = Column(String(1500))
 
     referral = Column(BigInteger)
 
