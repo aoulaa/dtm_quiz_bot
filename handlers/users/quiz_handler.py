@@ -5,6 +5,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
+from data.dict_pack import dict_of_topics
 from keyboards.inline.in_buttons import answer_kb
 from loader import dp
 
@@ -14,26 +15,18 @@ from collections import OrderedDict
 from operator import itemgetter
 
 
-dict_of_topics = {
-    'Present simple': 'present_simple',
-    'Past simple': 'past_simple'
-}
-
-
-@dp.message_handler(text=dict_of_topics)
+@dp.message_handler(text=dict_of_topics, state="*")
 async def send_present_q(message: types.Message, state: FSMContext):
     id_user = message.from_user.id
     await state.update_data(id=id_user)
-    # questions_by_topic = await commands.select_question
-    # _by_topic(dict_of_topics[message.text])  # Здесь получаем список вопросов по теме
     questions_by_topic = await get_best_questions(id_user, dict_of_topics[message.text])
     await state.update_data(questions_all=questions_by_topic)  # А тут обновляем данные в FSM
     await state.update_data(answered={})  # Здесь создадим пустой словарь, в который позже запишем ответы
     await Data.present_data.set()
 
     random.shuffle(questions_by_topic)  # Мешаем вопросы, чтобы выдать случайный вопрос из списка
-    answers = questions_by_topic[0].wrong_answer.split(
-        ',')  # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
+    answers = questions_by_topic[0].wrong_answer.split(',')
+    # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
     answers.append(questions_by_topic[0].right_answer)
     random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
     text_1 = 'Choose the correct answer'
@@ -58,7 +51,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     all_question = data.get('questions_all')
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
 
-    if len(answered.keys()) == 5:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
+    if len(answered.keys()) == 30:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(id_user, answered)
         await state.reset_state(with_data=False)
         await call.message.answer(summary)
@@ -91,9 +84,6 @@ async def make_summary(id_user, answered):  # функция подсчет ст
     usr = await commands.select_user(id_user)
     stats = json.loads(usr.stats)
     for key, value in answered.items():
-        if not stats.get(key):
-            stats[key] = 0
-        stats[key] += 1
         question = await commands.select_questions(int(key))
         count += 1
         text += f'{question.questions} ❌ ({question.right_answer})\n\n' \
@@ -101,6 +91,9 @@ async def make_summary(id_user, answered):  # функция подсчет ст
             else f'{question.questions} ✔️\n\n'
         if question.right_answer == value:
             score += 1
+            if not stats.get(key):
+                stats[key] = 0
+            stats[key] += 1
     await commands.update_user_stats(id_user, json.dumps(stats))
 
     text += f"<b>Out of {count}/{str(score)}</b>"
@@ -108,7 +101,7 @@ async def make_summary(id_user, answered):  # функция подсчет ст
     return ready_text
 
 
-async def get_best_questions(id_user, topic, num=5):
+async def get_best_questions(id_user, topic, num=30):
     questions = await commands.select_question_by_topic(topic)
     questions_ids = [q.id for q in questions]  # Генерируем список ID вопросов для дальнейшей обработки.
     usr = await commands.select_user(id_user)
@@ -122,7 +115,8 @@ async def get_best_questions(id_user, topic, num=5):
     best_questions_ids = []  # Здесь и далее из сортированного словаря получаем список вопросов
     for key, _ in stats.items():
         best_questions_ids.append(key)
-    best_questions_ids = best_questions_ids[0:num] # Это число ограничивает список вопросов для квиза
-    best_questions = [best_q for best_q in questions if str(best_q.id) in best_questions_ids]  # Немного магии от
+    best_questions_ids = best_questions_ids[0:num]  # Это число ограничивает список вопросов для квиза
+    best_questions = [best_q for best_q in questions
+                      if str(best_q.id) in best_questions_ids]  # Немного магии от
     # генератора списка. Тут получаем объекты вопросов, которые встречались реже всего.
     return best_questions

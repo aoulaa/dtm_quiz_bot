@@ -1,17 +1,17 @@
-# from utils.set_bot_commands import set_default_commands
+from utils.set_bot_commands import set_default_commands
 from loader import db
 from utils.db_api import db_gino, commands
+from aiogram import executor
+from utils.notify_admins import on_startup_notify
+from handlers import dp
 
 
-async def on_startup(dp):
-    import filters
-    import middlewares
-    filters.setup(dp)
-    middlewares.setup(dp)
+async def on_startup(dispatcher):
+    await on_startup_notify(dispatcher)
+    await set_default_commands(dispatcher)
 
-    from utils.notify_admins import on_startup_notify
     print("Подключаем БД")
-    await db_gino.on_startup(dp)
+    await db_gino.on_startup(dispatcher)
     print("Готово")
 
     print("Чистим базу")
@@ -35,12 +35,7 @@ async def on_startup(dp):
     await commands.add_question("past_simple", "IT ... very good place to work and grow", 'was', 'are,am,have')
     await commands.add_question("past_simple", "They ... selling things ", 'were', 'is,am,have')
     print("Готово")
-    await on_startup_notify(dp)
-    # await set_default_commands(dp)
 
 
 if __name__ == '__main__':
-    from aiogram import executor
-    from handlers import dp
-
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
