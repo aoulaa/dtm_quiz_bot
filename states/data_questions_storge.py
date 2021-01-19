@@ -12,4 +12,5 @@ class Admin(StatesGroup):
     add_right_answer = State()
     add_wrong_answer = State()
     question_dis = State()
+    ready_to_add = State()
 

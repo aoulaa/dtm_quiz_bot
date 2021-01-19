@@ -9,7 +9,6 @@ from handlers import dp
 async def on_startup(dispatcher):
     await on_startup_notify(dispatcher)
     await set_default_commands(dispatcher)
-
     print("Подключаем БД")
     await db_gino.on_startup(dispatcher)
     print("Готово")

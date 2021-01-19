@@ -22,7 +22,7 @@ topic_for_admins = ReplyKeyboardMarkup(
 
 admin_button = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="Choose a topic")]
+        [KeyboardButton(text="Add new questions")]
     ],
     resize_keyboard=True
 )
@@ -43,5 +43,6 @@ description = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="Choose the correct answer")]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    one_time_keyboard=True
 )

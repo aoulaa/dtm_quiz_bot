@@ -9,3 +9,15 @@ def answer_kb(answers, question_id):
     ]
     )
     return kb
+
+
+add_to_db = InlineKeyboardMarkup(
+    row_width=2,
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text='add to db', callback_data='add_db'),
+            InlineKeyboardButton(text="Cancel❌", callback_data='cancel')
+        ]
+    ],
+    resize_keyboard=True
+)

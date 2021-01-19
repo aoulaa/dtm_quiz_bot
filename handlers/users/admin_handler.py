@@ -1,23 +1,32 @@
 from aiogram.dispatcher import FSMContext
+from aiogram.types import CallbackQuery
 
 from data.dict_pack import list_of_topics
 from keyboards.default.main_buttons import admin_button, topic_for_admins, description
-from loader import dp
-from aiogram import types
+from keyboards.inline.in_buttons import add_to_db
 
 from states import Admin
 from utils.db_api import commands
 
+from aiogram import types
+from filters import IsPrivate
+from loader import dp
 
-@dp.message_handler(commands='add_question')
+from data.config import contributor
+
+
+@dp.message_handler(IsPrivate(), commands='add_question')
 async def add_question(msg: types.Message):
-    await msg.answer("Let's start adding questions",
-                     reply_markup=admin_button)
+    if msg.from_user.id not in contributor:
+        await msg.answer('You are not admin 🧐')
+    else:
+        await msg.answer("Welcome dear contributor🤗\n\nWhat would you like to do today ?",
+                         reply_markup=admin_button)
 
 
-@dp.message_handler(text='Choose a topic', state="*")
+@dp.message_handler(text='Add new questions', state="*")
 async def chose_topic(msg: types):
-    await msg.answer('choose the topic you want to add questions to',
+    await msg.answer('Choose the topic you want to add questions to',
                      reply_markup=topic_for_admins)
     await Admin.add_topic.set()
 
@@ -26,10 +35,10 @@ async def chose_topic(msg: types):
 async def save_topic(msg: types, state: FSMContext):
     topic_name = msg.text
     if topic_name not in list_of_topics:
-        await msg.answer('please send exciting topic')
+        await msg.answer('Please send exciting topic or choose from buttons below.❗')
     else:
         await state.update_data(topic_name=topic_name)
-        await msg.answer('Send the question in this format:\n I .... doctor.')
+        await msg.answer('Send the question in this format:\n<b>I .... doctor.</b>')
         await Admin.add_question.set()
 
 
@@ -60,17 +69,40 @@ async def save_question_dis(msg: types, state: FSMContext):
 
 @dp.message_handler(state=Admin.question_dis)
 async def save_send_db(msg: types, state: FSMContext):
+    description = msg.text
+    await state.update_data(description=description)
     data = await state.get_data()
     topic_name = data.get("topic_name")
     question = data.get("question")
     right_answer = data.get("right_answer")
     wrong_answer = data.get("wrong_answer")
-    descr = msg.text
+
+    text = f'<b>Question is being add to this topic:</b>\n"{topic_name}"\n\n' \
+           f'<b>Question itself:</b>\n"{question}"\n\n' \
+           f'<b>Right answer:</b>\n"{right_answer}"\n\n' \
+           f'<b>Wrong answer:</b>\n"{wrong_answer}"\n\n' \
+           f'<b>description of the question:</b>\n"{description}"'
+    await msg.answer(text, reply_markup=add_to_db)
+    await Admin.ready_to_add.set()
+
+
+@dp.callback_query_handler(state=Admin.ready_to_add, text=['add_db', 'cancel'])
+async def confirm(call: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ["back", topic_name]
+    buttons = ["back", data['topic_name']]
     keyboard.add(*buttons)
-    await commands.add_question(topic_name, question, right_answer, wrong_answer, descr)
-    await msg.answer('question is added', reply_markup=keyboard)
-    await state.finish()
-    await Admin.add_topic.set()
+    if call.data == 'add_db':
+        await commands.add_question(data['topic_name'], data['question'],
+                                    data['right_answer'], data['wrong_answer'],
+                                    data['description'])
+
+        await call.message.delete()
+        await call.message.answer('Question is added✅', reply_markup=keyboard)
+        await Admin.add_topic.set()
+
+    elif call.data == 'cancel':
+        await call.message.delete()
+        await call.message.answer('Question is cancelled', reply_markup=keyboard)
+        await Admin.add_topic.set()
 

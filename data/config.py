@@ -9,9 +9,14 @@ PGUSER = str(os.getenv("PGUSER"))
 PGPASSWORD = str(os.getenv("PGPASSWORD"))
 DATABASE = str(os.getenv("DATABASE"))
 admins = [
-    1079453114
+    1079453114,
+    # 61888314
 ]
 
+contributor = [
+    1079453114,
+    61888314
+]
 ip = os.getenv("ip")
 
 db_host = ip  # Если вы запускаете базу не через докер!
