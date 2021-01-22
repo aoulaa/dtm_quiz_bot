@@ -2,7 +2,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
 from data.dict_pack import list_of_topics
-from keyboards.default.main_buttons import admin_button, topic_for_admins, description
+from keyboards.default.main_buttons import admin_button, topic_for_admins, description, con_buttons
 from keyboards.inline.in_buttons import add_to_db
 
 from states import Admin
@@ -12,13 +12,14 @@ from aiogram import types
 from filters import IsPrivate
 from loader import dp
 
-from data.config import contributor
+from data.config import contributor, admins
 
 
 @dp.message_handler(IsPrivate(), commands='add_question')
 async def add_question(msg: types.Message):
-    if msg.from_user.id not in contributor:
-        await msg.answer('You are not admin 🧐')
+    id = msg.from_user.id
+    if msg.from_user.username not in contributor:
+        await msg.answer(f'You are not admin 🧐\nInvalid ID: {id}')
     else:
         await msg.answer("Welcome dear contributor🤗\n\nWhat would you like to do today ?",
                          reply_markup=admin_button)
@@ -106,3 +107,51 @@ async def confirm(call: CallbackQuery, state: FSMContext):
         await call.message.answer('Question is cancelled', reply_markup=keyboard)
         await Admin.add_topic.set()
 
+
+# for admin only to add new contributors
+@dp.message_handler(IsPrivate(), commands='add_con')
+async def add_question(msg: types.Message):
+    if msg.from_user.id not in admins:
+        await msg.answer('You are not admin 🧐')
+    else:
+        await msg.answer("Welcome back 🤗\n\nWhat would you like to do ?",
+                         reply_markup=con_buttons)
+
+
+# adding to the list of contributors
+@dp.message_handler(text='add con')
+async def add_con(msg: types.Message, state: FSMContext):
+    await msg.answer('Send contributor ID.\nFor example: 10548615489')
+    await state.set_state('add_con')
+
+
+@dp.message_handler(state='add_con')
+async def adding_con(msg: types.Message, state: FSMContext):
+
+    if not msg.text.isdigit():
+        await msg.answer('Please send contributor\'s ID which should be digit')
+    else:
+        contributor.append(msg.text)
+        await msg.answer(f'<b>{msg.text}</b> is added to the list of contributors\n\n{contributor}')
+        await state.finish()
+
+
+# removing from the list of contributors
+@dp.message_handler(text='remove con')
+async def remove_con(msg: types.Message, state: FSMContext):
+    await msg.answer(f'To remove from contributors send contributor ID.\nFor example: 10548615489'
+                     f'\n\nlist of contributors: {contributor}')
+    await state.set_state('remove_con')
+
+
+@dp.message_handler(state='remove_con')
+async def removing_con(msg: types.Message, state: FSMContext):
+
+    if not msg.text.isdigit():
+        await msg.answer('Please send contributor\'s ID which should be digit')
+    elif msg.text in contributor:
+        contributor.remove(msg.text)
+        await msg.answer(f'<b>{msg.text}</b> is removed from the list of contributors\n\n{contributor}')
+        await state.finish()
+    else:
+        await msg.answer('Please choose ID from the list above, you would like to delete')

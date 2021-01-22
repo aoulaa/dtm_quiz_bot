@@ -14,7 +14,8 @@ from utils.db_api import commands
 async def bot_start(message: types.Message):
     if message.from_user.id not in [usr.id for usr in await commands.select_all_users()]:
         stats = json.dumps({})
-        await commands.add_user(message.from_user.id, message.from_user.full_name, stats)
+        rating = 0
+        await commands.add_user(message.from_user.id, message.from_user.full_name, stats, rating)
         await message.answer(f'Привет, {message.from_user.full_name}!\n'
                              f'Ты у нас первый раз!\n'
                              f'Сейчас будем учить английский',

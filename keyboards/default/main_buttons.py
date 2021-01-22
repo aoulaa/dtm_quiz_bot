@@ -46,3 +46,11 @@ description = ReplyKeyboardMarkup(
     resize_keyboard=True,
     one_time_keyboard=True
 )
+
+con_buttons = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text='add con')],
+        [KeyboardButton(text='remove con')],
+    ],
+    resize_keyboard=True,
+)

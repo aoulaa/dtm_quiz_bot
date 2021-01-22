@@ -8,6 +8,7 @@ class User(TimedBaseModel):
     id = Column(BigInteger, primary_key=True)
     name = Column(String(100))
     stats = Column(String(80000))
+    rating = Column(Integer())
 
     referral = Column(BigInteger)
 

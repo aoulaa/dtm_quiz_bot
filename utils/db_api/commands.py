@@ -31,13 +31,13 @@ async def select_all_question():
 
 
 async def select_all_users():
-    users = await User.query.gino.all()
+    users = await User.query.order_by(User.rating.desc()).gino.all()
     return users
 
 
-async def add_user(user_id: int, name: str, stats: str, referral: int = 1079453114):
+async def add_user(user_id: int, name: str, stats: str, rating: int, referral: int = 1079453114):
     try:
-        user = User(id=user_id, name=name, stats=stats, referral=referral)
+        user = User(id=user_id, name=name, stats=stats, rating=rating, referral=referral)
         await user.create()
 
     except UniqueViolationError:
@@ -69,6 +69,13 @@ async def count_questions():
     return total
 
 
+async def update_rating(id: int, rating: int):
+    user = await User.query.where(User.id == id).gino.first()
+    await user.update(rating=rating).apply()
+
+
 async def update_user_stats(id: int, stats: str):
     user = await User.query.where(User.id == id).gino.first()
     await user.update(stats=stats).apply()
+
+
