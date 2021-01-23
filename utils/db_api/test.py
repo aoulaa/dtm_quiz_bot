@@ -15,10 +15,10 @@ async def test():
     await commands.add_question("present_simple", "you ... my friend", 'are', 'is,am,have')
 
     # await commands.add_user(2, 'name')
-    await commands.add_user_with_id(15, )
-    await commands.add_user_with_id(2, )
-    await commands.add_user_with_id( 3, )
-    await commands.add_user_with_id( )
+    # await commands.add_user_with_id(15, )
+    # await commands.add_user_with_id(2, )
+    # await commands.add_user_with_id( 3, )
+    # await commands.add_user_with_id( )
     r = await commands.select_all_users()
 
 

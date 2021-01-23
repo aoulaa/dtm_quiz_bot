@@ -18,7 +18,8 @@ from data.config import contributor, admins
 @dp.message_handler(IsPrivate(), commands='add_question')
 async def add_question(msg: types.Message):
     id = msg.from_user.id
-    if msg.from_user.username not in contributor:
+
+    if id not in contributor:
         await msg.answer(f'You are not admin 🧐\nInvalid ID: {id}')
     else:
         await msg.answer("Welcome dear contributor🤗\n\nWhat would you like to do today ?",

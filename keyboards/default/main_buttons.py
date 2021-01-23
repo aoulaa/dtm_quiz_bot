@@ -4,7 +4,7 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 main_menu_buttons = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="тесты по теме")],
-        [KeyboardButton(text="Рейтинг")]
+        [KeyboardButton(text="📊 Рейтинг")]
     ],
     resize_keyboard=True
 )
@@ -53,4 +53,12 @@ con_buttons = ReplyKeyboardMarkup(
         [KeyboardButton(text='remove con')],
     ],
     resize_keyboard=True,
+)
+
+rating_buttons = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text="🌎 Топ 10"), KeyboardButton(text="🕴 Мой рейтинг")],
+        [KeyboardButton(text="назад")]
+    ],
+    resize_keyboard=True
 )
