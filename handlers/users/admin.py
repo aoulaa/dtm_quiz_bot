@@ -1,8 +1,8 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
-from data.dict_pack import list_of_topics
-from keyboards.default.main_buttons import admin_button, topic_for_admins, description, con_buttons
+from data.dict_pack import list_of_topics, topic_for_admins
+from keyboards.default.main_buttons import admin_button, description, con_buttons, genrate_button
 from keyboards.inline.in_buttons import add_to_db
 
 from states import Admin
@@ -13,6 +13,12 @@ from filters import IsPrivate
 from loader import dp
 
 from data.config import contributor, admins
+
+
+# @dp.message_handler(text="backk", state="*")
+# async def go_back(msg: types.Message, state: FSMContext):
+#     await msg.answer('yes you did it thanks to Allah')
+#     await Admin.previous()
 
 
 @dp.message_handler(IsPrivate(), commands='add_question')
@@ -29,7 +35,7 @@ async def add_question(msg: types.Message):
 @dp.message_handler(text='Add new questions', state="*")
 async def chose_topic(msg: types):
     await msg.answer('Choose the topic you want to add questions to',
-                     reply_markup=topic_for_admins)
+                     reply_markup=genrate_button(topic_for_admins))
     await Admin.add_topic.set()
 
 
