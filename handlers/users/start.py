@@ -37,7 +37,7 @@ async def get_to_tests(msg: types.Message, state: FSMContext):
 async def go_back_to_menu(message: types.Message, state: FSMContext):
     await state.reset_state()
     await message.answer('back to topics',
-                         reply_markup=genrate_button(topic_for_admins))
+                         reply_markup=genrate_button(topic_for_admins, False))
     await Admin.add_topic.set()
 
 
@@ -52,4 +52,4 @@ async def go_back_to_menu(message: types.Message, state: FSMContext):
 async def back_to_main_topic(msg: types.Message, state: FSMContext):
     await state.reset_state()
     await msg.answer('выибирите другю тему',
-                     reply_markup=genrate_button(main_topic))
+                     reply_markup=genrate_button(main_topic, False))

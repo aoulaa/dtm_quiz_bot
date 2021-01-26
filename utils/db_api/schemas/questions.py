@@ -9,6 +9,7 @@ class User(TimedBaseModel):
     name = Column(String(100))
     stats = Column(String(80000))
     rating = Column(Integer())
+    language = Column(String(2))
 
     referral = Column(BigInteger)
 

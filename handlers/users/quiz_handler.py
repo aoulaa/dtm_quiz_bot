@@ -44,9 +44,7 @@ async def send_present_q(message: types.Message, state: FSMContext):
 
 @dp.callback_query_handler(state=Data.present_data)
 async def get_answer(call: CallbackQuery, state: FSMContext):
-    # id_u = call.message.from_user.id
-    # if id_u != id_u:
-    #     await call.message.answer('sorry bro')
+
     await call.message.delete()
     answer, q_id = call.data.split(';')  # тут получаем коллбек дату и сразу распаковываем ее в ID и ответ.
     data = await state.get_data()  # Получаем данные из FSM

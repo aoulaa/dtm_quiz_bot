@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -31,5 +32,8 @@ redis = {
     'encoding': 'utf8'
 }
 
+I18N_DOMAIN = 'languages'
+BASE_DIR = Path(__file__).parent
+LOCALES_DIR = BASE_DIR / 'locales'
 
 POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{db_host}/{DATABASE}"

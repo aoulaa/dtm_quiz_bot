@@ -1,33 +1,22 @@
-
-
 from aiogram import types
 
 from keyboards.default.main_buttons import rating_buttons
 
-from loader import dp
-
+from loader import dp, _
 
 from utils.db_api import commands
 
 
-@dp.message_handler(text='📊 Рейтинг')
+@dp.message_handler(text=_('📊 Рейтинг'))
 async def get_to_ratings(msg: types.Message):
-    text = """Это рейтинг игроков. 
+    text = _('Это рейтинг игроков.\n'
+             'Выполняй тесты каждый день и получай рейтинговые очки!\n\n'
+             'Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:')
 
-Выполняй задания каждый день и получай рейтинговые очки!
-
-Чтобы перейти в лигу выше нужно набрать минимум очков для перехода и войти в топ 3 игроков лиги.
-
-Минимумы очков:
-🥉 ->🥈 500
-🥈 ->🥇 1000
-🥇 ->💎 1900
-
-Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:"""
     await msg.answer(text, reply_markup=rating_buttons)
 
 
-@dp.message_handler(text='🕴 Мой рейтинг')
+@dp.message_handler(text=_('🕴 Мой рейтинг'))
 async def get_my_rating(msg: types.Message):
     id = msg.from_user.id
     users = await commands.select_all_users()
@@ -35,7 +24,7 @@ async def get_my_rating(msg: types.Message):
     await msg.answer(text)
 
 
-@dp.message_handler(text='🌎 Топ 10')
+@dp.message_handler(text=_('🌎 Топ 10'))
 async def get_all_rating(msg: types.Message):
     users = await commands.select_all_users()
     text = await all_ratings(users)

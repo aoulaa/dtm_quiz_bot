@@ -8,15 +8,6 @@ main_menu_buttons = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-# topic_for_admins = ReplyKeyboardMarkup(
-#     keyboard=[
-#         [KeyboardButton(text='bаck')],
-#         [KeyboardButton(text='present_simple')],
-#         [KeyboardButton(text='past_simple')]
-#     ],
-#     resize_keyboard=True,
-#     one_time_keyboard=True
-# )
 
 admin_button = ReplyKeyboardMarkup(
     keyboard=[
@@ -50,8 +41,8 @@ rating_buttons = ReplyKeyboardMarkup(
 )
 
 
-def genrate_button(buttons):
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+def genrate_button(buttons, key):
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=key)
     keyboard.add(*buttons)
     return keyboard
 

@@ -79,3 +79,6 @@ async def update_user_stats(id: int, stats: str):
     await user.update(stats=stats).apply()
 
 
+async def update_language(id: int, language: str):
+    user = await User.query.where(User.id == id).gino.first()
+    await user.update(language=language).apply()

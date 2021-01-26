@@ -17,8 +17,14 @@ from data.config import contributor, admins
 
 # @dp.message_handler(text="backk", state="*")
 # async def go_back(msg: types.Message, state: FSMContext):
-#     await msg.answer('yes you did it thanks to Allah')
-#     await Admin.previous()
+#     text = ''
+#     state_name = await state.get_state()
+#     if state_name is not None:
+#         await Admin.previous()
+#         if state_name == Admin.add_question:
+#             text = 'Send the question in this format:\n<b>I .... doctor.</b>'
+#
+#     await msg.answer(text)
 
 
 @dp.message_handler(IsPrivate(), commands='add_question')
@@ -35,7 +41,7 @@ async def add_question(msg: types.Message):
 @dp.message_handler(text='Add new questions', state="*")
 async def chose_topic(msg: types):
     await msg.answer('Choose the topic you want to add questions to',
-                     reply_markup=genrate_button(topic_for_admins))
+                     reply_markup=genrate_button(topic_for_admins, True))
     await Admin.add_topic.set()
 
 

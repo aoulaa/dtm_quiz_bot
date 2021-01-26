@@ -1,22 +1,49 @@
-
 # for users to get questions from DB
 dict_of_topics = {
     'Present simple': 'present_simple',
     'Past simple': 'past_simple',
     'Nouns': 'noun',
+    'Compound nouns': 'compound_nouns',
+    'Forming the possessive form of nouns': 'form_possessive_nouns',
+    'Indefinite article a/an': 'indefinite_article',
+    'Definite article the': 'article_the',
+    'Articles with nouns in set expressions': 'article_nouns_set_expression',
+    'Articles with common nouns': 'articles_common_nouns',
+    'Articles with proper nouns': 'articles_proper_nouns',
+    'Personal/Objective Pronouns': 'personal_objective_pronouns',
+    'Possessive pronouns': 'possessive_pronouns',
+    'Reflexive pronoun': 'reflexive_pronoun',
+    'Demonstrative nouns': 'demonstrative_nouns',
+    'Indefinite pronouns, adverbials (some, any, no)': 'indefinite_pronoun_adverbials',
+    'Quantifier': 'quantifier',
+    'All/all of most/most of none etc': 'all_of_none_of',
+    'Distributives - both/neither/either etc': 'both_neither_etc',
+    'All every and whole': 'all_every_whole',
+    'Each, every, other, another': 'each_every_other_another',
+    'Adjectives & Adverbs sentence completion': 'adj_adver_sentence',
+    'adjectives ending -ing & -ed': 'adj_ending_ing_ed',
+    'Adjectives & Adverbs with exceptions well hard': 'adj_adver_execptions',
+    'So & such, enough & too the same, as': 'so_such_enough_too_etc',
+    'Comparison adjectives': 'comparison_adjectives',
+    'Superlative adjectives': 'superlative_adjectives',
+    'Comparison - much better/any better/ the sooner.. the better etc': 'comparison_much_better_etc',
+    'Comparison - as..as, not so..as. like, than': 'comparison_as_as_etc',
+    'Still/yet/already/any more etc': 'still_yet_already_etc',
+    'Viewpoint and commenting adverbs': 'viewpoint_commenting_adverbs',
+    'Adverbs of Certainty': 'adverbs_certainty',
+
+
+
 
 }
 
 # for admins to check if the topic they want to add question does exist
-list_of_topics = ['present_simple', 'past_simple']
+list_of_topics = []
+list_of_topics.extend(dict_of_topics.values())
 
-
-
-topic_for_admins = ['bаck', 'present_simple', 'past_simple']
-
-
-
-
+# for admins to choose from topics
+topic_for_admins = ['bаck']
+topic_for_admins.extend(dict_of_topics.values())
 
 
 # bellow are data for topics
@@ -26,6 +53,7 @@ list_nouns = ['🔙back', 'Nouns', 'Compound nouns',
 list_articles = ['🔙back', 'Indefinite article a/an', 'Definite article the',
                  'Articles with nouns in set expressions',
                  'Articles with common nouns', 'Articles with proper nouns']
+
 
 list_pronouns = ['🔙back', 'Personal/Objective Pronouns', 'Possessive pronouns',
                  'Reflexive pronoun', 'Demonstrative nouns',
@@ -42,7 +70,7 @@ list_Adjectives_adverbs = ['🔙back', 'Adjectives & Adverbs sentence completion
                            'Comparison - as..as, not so..as. like, than', 'Still/yet/already/any more etc',
                            'Viewpoint and commenting adverbs', 'Adverbs of Certainty'
                            ]
-
+# here
 list_verb = ['🔙back', 'Verb + V-ing', 'Verb + to V', 'Complex object: Verb (+ object) + to V',
              'Verb + V-ing or to V', 'Preposition (in/for/about etc.) + V-ing',
              'To..,for..and so that', 'Adjective + to V']
@@ -106,23 +134,5 @@ dict_nov_bar = {
 
 main_topic = [
     'назад',
-    'Nouns💡',
-    'Articles',
-    'Pronouns',
-    'Quantifiers',
-    'Adjectives and adverbs',
-    'Numerals',
-    'Verb',
-    'Modal verbs',
-    'Tenses',
-    'Passive voice',
-    'Reported speech',
-    'Tag questions',
-    'Clauses',
-    'Conjunction and Preposition',
-    'Subjunctive mood/ unreal wishes(i wish)',
-    'Conditional sentences',
-    'Completions',
-    'Give the right definition/synonym/antonym etc',
-    'Gap filling'
 ]
+main_topic.extend(dict_nov_bar.keys())
