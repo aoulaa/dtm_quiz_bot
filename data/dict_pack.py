@@ -1,7 +1,5 @@
 # for users to get questions from DB
 dict_of_topics = {
-    'Present simple': 'present_simple',
-    'Past simple': 'past_simple',
     'Nouns': 'noun',
     'Compound nouns': 'compound_nouns',
     'Forming the possessive form of nouns': 'form_possessive_nouns',
@@ -31,8 +29,65 @@ dict_of_topics = {
     'Still/yet/already/any more etc': 'still_yet_already_etc',
     'Viewpoint and commenting adverbs': 'viewpoint_commenting_adverbs',
     'Adverbs of Certainty': 'adverbs_certainty',
-
-
+    'Verb + V-ing': 'verb_v_ing',
+    'Verb + to V':'verb_to_verb',
+    'Complex object: Verb (+ object) + to V': 'complex_object_v',
+    'Verb + V-ing or to V': 'verb_ving_to_v',
+    'Preposition (in/for/about etc.) + V-ing': 'preposition_in_for_about_etc',
+    'To..,for..and so that': 'to_for_and_so_that',
+    'Adjective + to V': 'adjective_to_v',
+    'Can/could/be able to + V': 'can_could_be_able',
+    'Could(do)/could have (done)': 'could_do_could_have',
+    "Must/can't/have to/needn't": 'must_cant_have_to',
+    'May and Might': 'may_might',
+    'Should/would/had better': 'should_would_had_better',
+    'Requests/offers/permission/invitations': 'requests_offers_permission',
+    'Present simple': 'present_simple',
+    'Present Continuous': 'present_continuous',
+    'Present perfect/continuous': 'present_perfect_continuous',
+    'Past simple': 'past_simple',
+    'Past continuous': 'past_continuous',
+    'Past perfect': 'past_perfect',
+    'Past Perfect continuous': 'past_perfect_continuous',
+    'Future simple/to be going to': 'future_simple_to_be_going',
+    'Future continuous/perfect continuous': 'future_continuous_perfect_continuous',
+    'Construction: used to': 'construction_used_to',
+    'Passive Present': 'passive_present',
+    'Passive Past': 'passive_past',
+    'Passive Future': 'passive_future',
+    'Reported Statements': 'reported_statements',
+    'Reported Questions': 'reported_questions',
+    'Reported Orders/Requests': 'reported_orders',
+    'Tag Question': 'tag_question',
+    'I think so/I have so etc': 'think_so_have_so_etc',
+    'Relative clauses  who/that/which': 'relative_clause_who_that_which',
+    'Clauses with & without who/that/which': 'clauses_with_without_who_that',
+    'Clauses whose/whom/where': 'clauses_whose_whom_where',
+    'Clauses: extra information': 'clauses_extra_info',
+    'Clauses V-ing/V-ed(gerund, participle)': 'clauses_v_ing_v_ed',
+    'Although/though/even though/in split of/despite': 'although_though_even_though',
+    'Unless/As long as/provided/providing/in case': 'unless_as_long_as_provided',
+    'As/like and as/as if/as though': 'as_like_as_if_as_though',
+    'For/during and while': 'for_during_while',
+    'By/until': 'by_until',
+    'At/on/in/on in time/at the end & in the end(time)': 'at_on_in_on_in_time_at_the_end',
+    'In/at/on/by(position)': 'in_at_on_by_position',
+    'To/at/in/into(direction)': 'to_at_in_into_direction',
+    'In/on/at(other uses)': 'in_on_at_other',
+    'Noun + preposition': 'noun_preposition',
+    'Adjective + preposition': 'adjective_preposition',
+    'Verb + preposition': 'verb_preposition',
+    'Sentence completion': 'sentence_completion',
+    'Dialogue Completion': 'dialogue_completion',
+    'Text completion(missing part)': 'text_completion_missing',
+    'Text completion(right form of the verb)': 'text_completion_right',
+    'Gap filling(right form of the verb)': 'Gap filling_right',
+    'Gap filling(mixed:nouns, verb, Preposition etc)': 'gap_filling_mixed',
+    'Gap filling(choose the right part of speech)': 'gap_filling_choose_right_part',
+    'Numerals': 'numerals',
+    'Subjunctive mood/ unreal wishes(i wish)': 'subjunctive_mood_unreal_wishes',
+    'Conditional sentences': 'conditional_sentence',
+    'Give the right definition/synonym/antonym etc': 'give_right_definition_synonym',
 
 
 }
@@ -70,12 +125,12 @@ list_Adjectives_adverbs = ['🔙back', 'Adjectives & Adverbs sentence completion
                            'Comparison - as..as, not so..as. like, than', 'Still/yet/already/any more etc',
                            'Viewpoint and commenting adverbs', 'Adverbs of Certainty'
                            ]
-# here
+
 list_verb = ['🔙back', 'Verb + V-ing', 'Verb + to V', 'Complex object: Verb (+ object) + to V',
              'Verb + V-ing or to V', 'Preposition (in/for/about etc.) + V-ing',
              'To..,for..and so that', 'Adjective + to V']
 
-list_modal_verbs = ['🔙back', 'Can/could/be able to + V', ' Could(do)/could have (done)',
+list_modal_verbs = ['🔙back', 'Can/could/be able to + V', 'Could(do)/could have (done)',
                     "Must/can't/have to/needn't", 'May and Might', 'Should/would/had better',
                     'Requests/offers/permission/invitations']
 
@@ -102,17 +157,13 @@ list_conjunction_preposition = ['🔙back', 'Although/though/even though/in spli
                                 'In/at/on/by(position)', 'To/at/in/into(direction)', 'In/on/at(other uses)',
                                 'Noun + preposition', 'Adjective + preposition', 'Verb + preposition',
                                 ]
+
 list_completions = ['🔙back', 'Sentence completion', 'Dialogue Completion',
                     'Text completion(missing part)', 'Text completion(right form of the verb)']
 
 list_gap_filling = ['🔙back', 'Gap filling(right form of the verb)', 'Gap filling(mixed:nouns, verb, Preposition etc)',
                     'Gap filling(choose the right part of speech)']
 
-lists = ['Numerals',
-         'Subjunctive mood/ unreal wishes(i wish)',
-         'Conditional sentences',
-         'Give the right definition/synonym/antonym etc',
-         ]
 
 dict_nov_bar = {
     'Nouns💡': list_nouns,
