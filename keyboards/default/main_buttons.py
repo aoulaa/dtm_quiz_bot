@@ -1,9 +1,10 @@
+from loader import _
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 main_menu_buttons = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="🧠 Заниматься")],
-        [KeyboardButton(text="📊 Рейтинг")]
+        [KeyboardButton(text=_("🧠 Заниматься"))],
+        [KeyboardButton(text=_("📊 Рейтинг"))]
     ],
     resize_keyboard=True
 )
@@ -34,10 +35,10 @@ con_buttons = ReplyKeyboardMarkup(
 
 rating_buttons = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="🌎 Топ 10"), KeyboardButton(text="🕴 Мой рейтинг")],
-        [KeyboardButton(text="назад")]
+        [KeyboardButton(text=_("🌎 Топ 10")), KeyboardButton(text=_("🕴 Мой рейтинг"))],
+        [KeyboardButton(text=_("назад"))]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
 )
 
 
@@ -45,4 +46,5 @@ def genrate_button(buttons, key):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=key)
     keyboard.add(*buttons)
     return keyboard
+
 

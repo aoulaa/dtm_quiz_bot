@@ -38,7 +38,7 @@ async def add_question(msg: types.Message):
                          reply_markup=admin_button)
 
 
-@dp.message_handler(text='Add new questions', state="*")
+@dp.message_handler(user_id=contributor, text='Add new questions', state="*")
 async def chose_topic(msg: types):
     await msg.answer('Choose the topic you want to add questions to',
                      reply_markup=genrate_button(topic_for_admins, True))
@@ -132,7 +132,7 @@ async def add_question(msg: types.Message):
 
 
 # adding to the list of contributors
-@dp.message_handler(text='add con')
+@dp.message_handler(user_id=admins, text='add con')
 async def add_con(msg: types.Message, state: FSMContext):
     await msg.answer('Send contributor ID.\nFor example: 10548615489')
     await state.set_state('add_con')
@@ -150,7 +150,7 @@ async def adding_con(msg: types.Message, state: FSMContext):
 
 
 # removing from the list of contributors
-@dp.message_handler(text='remove con')
+@dp.message_handler(user_id=admins, text='remove con')
 async def remove_con(msg: types.Message, state: FSMContext):
     await msg.answer(f'To remove from contributors send contributor ID.\nFor example: 10548615489'
                      f'\n\nlist of contributors: {contributor}')

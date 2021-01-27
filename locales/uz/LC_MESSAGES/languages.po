@@ -1,0 +1,52 @@
+# Uzbek translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-01-27 21:37+0500\n"
+"PO-Revision-Date: 2021-01-27 21:45+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: uz\n"
+"Language-Team: uz <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: handlers/users/nav_handler.py:8
+msgid "🧠 Заниматься"
+msgstr ""
+
+#: handlers/users/nav_handler.py:10
+msgid "Выбери тему и начни попрактиковаться"
+msgstr ""
+
+#: handlers/users/nav_handler.py:16
+msgid "Выбери выбери тему"
+msgstr ""
+
+#: handlers/users/rating.py:10
+msgid "📊 Рейтинг"
+msgstr ""
+
+#: handlers/users/rating.py:12
+msgid ""
+"Это рейтинг игроков.\n"
+"Выполняй тесты каждый день и получай рейтинговые очки!\n"
+"\n"
+"Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:"
+msgstr ""
+
+#: handlers/users/rating.py:19
+msgid "🕴 Мой рейтинг"
+msgstr ""
+
+#: handlers/users/rating.py:27
+msgid "🌎 Топ 10"
+msgstr ""
+

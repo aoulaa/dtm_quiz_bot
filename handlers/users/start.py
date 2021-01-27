@@ -6,7 +6,8 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 
 from data.dict_pack import main_topic, topic_for_admins
 from keyboards.default.main_buttons import main_menu_buttons, admin_button, genrate_button
-from loader import dp
+from keyboards.inline.in_buttons import languages_markup
+from loader import dp, _
 from states import Admin
 from utils.db_api import commands
 
@@ -20,15 +21,15 @@ async def bot_start(message: types.Message):
         await message.answer(f'Привет, {message.from_user.full_name}!\n'
                              f'Ты у нас первый раз!\n'
                              f'Сейчас будем учить английский',
-                             reply_markup=main_menu_buttons)
+                             reply_markup=languages_markup)
         return
     await message.answer(f'Привет, {message.from_user.full_name}!\n'
                          f'Сейчас будем учить английский', reply_markup=main_menu_buttons)
 
 
-@dp.message_handler(text='назад', state="*")
+@dp.message_handler(text=_('назад'), state="*")
 async def get_to_tests(msg: types.Message, state: FSMContext):
-    await msg.answer('вы в главном меню',
+    await msg.answer(_('вы в главном меню'),
                      reply_markup=main_menu_buttons)
     await state.finish()
 

@@ -13,5 +13,5 @@ async def navigation(msg: types.Message):
 
 @dp.message_handler(text=dict_nov_bar)
 async def dict_nov(msg: types.Message):
-    await msg.answer(_('Выбери выбери тему'),
+    await msg.answer(_('Выбери тему'),
                      reply_markup=genrate_button(dict_nov_bar[msg.text], False))

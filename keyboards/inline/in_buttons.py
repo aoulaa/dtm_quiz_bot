@@ -21,3 +21,14 @@ add_to_db = InlineKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+
+languages_markup = InlineKeyboardMarkup(
+        inline_keyboard=
+        [
+            [
+                InlineKeyboardButton(text="Русский", callback_data="lang_ru")],
+            [
+                InlineKeyboardButton(text="Uzbek", callback_data="lang_uz"),
+            ]
+        ]
+    )
