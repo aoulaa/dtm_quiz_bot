@@ -15,4 +15,4 @@ __all__ = ["bot", "storage", "dp", "db", "_"]
 
 i18n = setup_middleware(dp)
 
-_ = i18n.gettext
+_ = i18n.lazy_gettext

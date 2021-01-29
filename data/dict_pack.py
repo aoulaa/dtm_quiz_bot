@@ -1,3 +1,4 @@
+from loader import _
 # for users to get questions from DB
 dict_of_topics = {
     'Nouns': 'noun',
@@ -184,6 +185,6 @@ dict_nov_bar = {
 }
 
 main_topic = [
-    'назад',
+    '⬅️back',
 ]
 main_topic.extend(dict_nov_bar.keys())

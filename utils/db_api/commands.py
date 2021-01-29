@@ -49,6 +49,11 @@ async def select_user(id: int):
     return user
 
 
+async def select_language_by_id(lang: str):
+    user = await User.query.where(User.lang == lang).gino.all()
+    return user
+
+
 async def select_questions_id(questions_ids: int):
     user = await User.query.where(User.questions_ids == questions_ids).gino.all()
     return user

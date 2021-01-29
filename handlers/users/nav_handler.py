@@ -7,6 +7,7 @@ from loader import dp, _
 
 @dp.message_handler(text=_('🧠 Заниматься'))
 async def navigation(msg: types.Message):
+
     await msg.answer(_('Выбери тему и начни попрактиковаться'),
                      reply_markup=genrate_button(main_topic, False))
 

@@ -36,7 +36,7 @@ con_buttons = ReplyKeyboardMarkup(
 rating_buttons = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text=_("🌎 Топ 10")), KeyboardButton(text=_("🕴 Мой рейтинг"))],
-        [KeyboardButton(text=_("назад"))]
+        [KeyboardButton(text=_("⬅ назад"))]
     ],
     resize_keyboard=True,
 )
@@ -46,5 +46,4 @@ def genrate_button(buttons, key):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=key)
     keyboard.add(*buttons)
     return keyboard
-
 

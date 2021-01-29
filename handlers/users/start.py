@@ -18,16 +18,15 @@ async def bot_start(message: types.Message):
         stats = json.dumps({})
         rating = 0
         await commands.add_user(message.from_user.id, message.from_user.full_name, stats, rating)
-        await message.answer(f'Привет, {message.from_user.full_name}!\n'
-                             f'Ты у нас первый раз!\n'
-                             f'Сейчас будем учить английский',
+        await message.answer(f'Hello, {message.from_user.full_name}!\n'
+                             f'Please Choose a Language',
                              reply_markup=languages_markup)
         return
     await message.answer(f'Привет, {message.from_user.full_name}!\n'
                          f'Сейчас будем учить английский', reply_markup=main_menu_buttons)
 
 
-@dp.message_handler(text=_('назад'), state="*")
+@dp.message_handler(text=['⬅️back', _('⬅ назад')], state="*")
 async def get_to_tests(msg: types.Message, state: FSMContext):
     await msg.answer(_('вы в главном меню'),
                      reply_markup=main_menu_buttons)
@@ -52,5 +51,5 @@ async def go_back_to_menu(message: types.Message, state: FSMContext):
 @dp.message_handler(text='🔙back', state="*")
 async def back_to_main_topic(msg: types.Message, state: FSMContext):
     await state.reset_state()
-    await msg.answer('выибирите другю тему',
+    await msg.answer(_('выберите другую тему'),
                      reply_markup=genrate_button(main_topic, False))

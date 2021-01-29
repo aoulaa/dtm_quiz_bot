@@ -4,15 +4,15 @@ from aiogram.dispatcher.filters import Command
 from aiogram.dispatcher.filters.builtin import CommandHelp
 
 from keyboards.default.main_buttons import main_menu_buttons
-from loader import dp
+from loader import dp, _
 
 
 @dp.message_handler(CommandHelp(), state="*")
 async def bot_help(message: types.Message):
-    text = ("Список команд: ",
-            "/start - Начать диалог",
-            "/help - Получить справку",
-            "/restart - Если что-то пойдет не так")
+    text = (_("Список команд: ",
+              "/start - Начать диалог",
+              "/help - Получить справку",
+              "/restart - Если что-то пойдет не так"))
 
     await message.answer("\n".join(text))
 
@@ -20,5 +20,5 @@ async def bot_help(message: types.Message):
 @dp.message_handler(Command(['restart']), state="*")
 async def bot_start(message: types.Message, state: FSMContext):
     await state.reset_state()
-    await message.answer('упсс все норм ? ',
+    await message.answer(_('упсс все норм ?'),
                          reply_markup=main_menu_buttons)
