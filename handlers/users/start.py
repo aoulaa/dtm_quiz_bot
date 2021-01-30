@@ -19,11 +19,12 @@ async def bot_start(message: types.Message):
         rating = 0
         await commands.add_user(message.from_user.id, message.from_user.full_name, stats, rating)
         await message.answer(f'Hello, {message.from_user.full_name}!\n'
-                             f'Please Choose a Language',
+                             f'Firstly, let\'s choose your language',
                              reply_markup=languages_markup)
         return
-    await message.answer(f'Привет, {message.from_user.full_name}!\n'
-                         f'Сейчас будем учить английский', reply_markup=main_menu_buttons)
+    await message.answer(_('Привет, {}!\n'
+                         'я тебя хорошо знаю что сегодня будем делать?').format(message.from_user.full_name),
+                         reply_markup=main_menu_buttons)
 
 
 @dp.message_handler(text=['⬅️back', _('⬅ назад')], state="*")

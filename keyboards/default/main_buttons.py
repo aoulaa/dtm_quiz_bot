@@ -4,7 +4,7 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 main_menu_buttons = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text=_("🧠 Заниматься"))],
-        [KeyboardButton(text=_("📊 Рейтинг"))]
+        [KeyboardButton(text=_("📊 Рейтинг")), KeyboardButton(text=_("язык🔁"))]
     ],
     resize_keyboard=True
 )

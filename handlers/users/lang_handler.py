@@ -1,9 +1,11 @@
 import typing
 from dataclasses import dataclass
 
-from aiogram.dispatcher.filters import Command
+from aiogram import types
+from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
+from keyboards.inline.in_buttons import languages_markup
 from loader import dp, _
 from utils.db_api import commands
 
@@ -67,16 +69,23 @@ def generate_reply_keyboard(args: ListOfButtons) -> ReplyKeyboardMarkup:
 async def change_language(call: CallbackQuery):
     await call.message.edit_reply_markup()
     await call.message.delete()
-    id = call.from_user.id
+    id = call.message.chat.id
     lang = call.data[-2:]
-
     await commands.update_language(id, lang)
     menu = ListOfButtons(
         text=[_("🧠 Заниматься", locale=lang),
               _("📊 Рейтинг", locale=lang),
+              _("язык🔁", locale=lang)
               ],
-        align=[1, 1]
+        align=[1, 2]
     ).reply_keyboard
-    text = _("Ваш язык был изменен", locale=lang)
+    text = _("Ваш язык был изменен, вы находитесь в главном меню", locale=lang)
     await call.message.answer(text,
                               reply_markup=menu)
+
+
+@dp.message_handler(text=_('язык🔁'), state="*")
+async def bot_language(message: types.Message, state: FSMContext):
+    await state.reset_state()
+    await message.answer(_('Хотите изменить язык?'),
+                         reply_markup=languages_markup)

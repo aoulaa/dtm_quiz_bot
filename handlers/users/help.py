@@ -4,6 +4,7 @@ from aiogram.dispatcher.filters import Command
 from aiogram.dispatcher.filters.builtin import CommandHelp
 
 from keyboards.default.main_buttons import main_menu_buttons
+
 from loader import dp, _
 
 
@@ -11,7 +12,6 @@ from loader import dp, _
 async def bot_help(message: types.Message):
     text = (_("Список команд: ",
               "/start - Начать диалог",
-              "/help - Получить справку",
               "/restart - Если что-то пойдет не так"))
 
     await message.answer("\n".join(text))
