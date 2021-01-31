@@ -1,0 +1,176 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-01-31 17:41+0500\n"
+"PO-Revision-Date: 2021-01-27 21:48+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: handlers/users/help.py:13
+msgid ""
+"Список команд: \n"
+"/start - Начать диалог\n"
+"/restart - Если что-то пойдет не так"
+msgstr ""
+
+#: handlers/users/help.py:23
+msgid "упсс все норм ?"
+msgstr ""
+
+#: handlers/users/lang_handler.py:76 handlers/users/nav_handler.py:8
+#: keyboards/default/main_buttons.py:6
+msgid "🧠 Заниматься"
+msgstr ""
+
+#: handlers/users/lang_handler.py:77 handlers/users/rating.py:10
+#: keyboards/default/main_buttons.py:7
+msgid "📊 Рейтинг"
+msgstr ""
+
+#: handlers/users/lang_handler.py:78 handlers/users/lang_handler.py:91
+#: keyboards/default/main_buttons.py:7
+msgid "язык🔁"
+msgstr ""
+
+#: handlers/users/lang_handler.py:83
+msgid "Добро пожаловать, надеюсь тебе тут понравится."
+msgstr ""
+
+#: handlers/users/lang_handler.py:85
+msgid "Ваш язык был изменен, вы находитесь в главном меню"
+msgstr ""
+
+#: handlers/users/lang_handler.py:94
+msgid "Хотите изменить язык?"
+msgstr ""
+
+#: handlers/users/nav_handler.py:11
+msgid "Выбери тему и начни попрактиковаться"
+msgstr ""
+
+#: handlers/users/nav_handler.py:17
+msgid "Выбери тему"
+msgstr ""
+
+#: handlers/users/rating.py:12
+msgid ""
+"Это рейтинг игроков.\n"
+"Выполняй тесты каждый день и получай рейтинговые очки!\n"
+"\n"
+"Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:"
+msgstr ""
+
+#: handlers/users/rating.py:19 keyboards/default/main_buttons.py:38
+msgid "🕴 Мой рейтинг"
+msgstr ""
+
+#: handlers/users/rating.py:27 keyboards/default/main_buttons.py:38
+msgid "🌎 Топ 10"
+msgstr ""
+
+#: handlers/users/start.py:25
+msgid ""
+"Привет, {}!\n"
+"Я тебя хорошо знаю что сегодня будем делать?"
+msgstr ""
+
+#: handlers/users/start.py:30 keyboards/default/main_buttons.py:39
+msgid "⬅ назад"
+msgstr ""
+
+#: handlers/users/start.py:32
+msgid "вы в главном меню"
+msgstr ""
+
+#: handlers/users/start.py:55
+msgid "выберите другую тему"
+msgstr ""
+
+#~ msgid "Выбери выбери тему"
+#~ msgstr ""
+
+#~ msgid "назад"
+#~ msgstr ""
+
+#~ msgid "выибирите другю тему"
+#~ msgstr ""
+
+#~ msgid "🧠 Заниматься"
+#~ msgstr ""
+
+#~ msgid "📊 Рейтинг"
+#~ msgstr ""
+
+#~ msgid "Ваш язык был изменен"
+#~ msgstr ""
+
+#~ msgid "Выбери тему и начни попрактиковаться"
+#~ msgstr ""
+
+#~ msgid "Выбери тему"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Это рейтинг игроков.\n"
+#~ "Выполняй тесты каждый день и получай рейтинговые очки!\n"
+#~ "\n"
+#~ "Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:"
+#~ msgstr ""
+
+#~ msgid "🕴 Мой рейтинг"
+#~ msgstr ""
+
+#~ msgid "🌎 Топ 10"
+#~ msgstr ""
+
+#~ msgid "⬅ назад"
+#~ msgstr ""
+
+#~ msgid "вы в главном меню"
+#~ msgstr ""
+
+#~ msgid "выберите другую тему"
+#~ msgstr ""
+
+#~ msgid "Список команд: "
+#~ msgstr ""
+
+#~ msgid "Список команд: \n"
+#~ msgstr ""
+
+#~ msgid "толко для админов"
+#~ msgstr ""
+
+#~ msgid "Запустить бота"
+#~ msgstr ""
+
+#~ msgid "Помощь"
+#~ msgstr ""
+
+#~ msgid "Если что-то пойдет не так"
+#~ msgstr ""
+
+#~ msgid "только для админов"
+#~ msgstr ""
+
+#~ msgid "Добро пожаловать надеюсь тебе тут понравится."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Привет, {}!\n"
+#~ "я тебя хорошо знаю что сегодня будем делать?"
+#~ msgstr ""
+
