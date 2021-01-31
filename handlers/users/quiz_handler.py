@@ -90,7 +90,7 @@ async def make_summary(id_user, answered):  # функция подсчет ст
         count += 1
         text += f'{question.questions} ❌ ({question.right_answer})\n\n' \
             if question.right_answer != value \
-            else f'{question.questions} ✔ ({question.right_answer}) \n\n'
+            else f'{question.questions} ✅ ({question.right_answer}) \n\n'
 
         if question.right_answer == value:
             rating += 1

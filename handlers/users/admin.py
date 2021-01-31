@@ -125,7 +125,6 @@ async def confirm(call: CallbackQuery, state: FSMContext):
         await call.message.answer('Question is cancelled', reply_markup=keyboard)
         await Admin.add_topic.set()
     await commands.update_admin_stats(id_user, admin_stats)
-    print(admin_stats)
 
 
 # for admin only to add new contributors

@@ -1,6 +1,7 @@
-from loader import _
+
 # for users to get questions from DB
 dict_of_topics = {
+    'Test2021': 'test_2021',
     'Nouns': 'noun',
     'Compound nouns': 'compound_nouns',
     'Forming the possessive form of nouns': 'form_possessive_nouns',
@@ -31,7 +32,7 @@ dict_of_topics = {
     'Viewpoint and commenting adverbs': 'viewpoint_commenting_adverbs',
     'Adverbs of Certainty': 'adverbs_certainty',
     'Verb + V-ing': 'verb_v_ing',
-    'Verb + to V':'verb_to_verb',
+    'Verb + to V': 'verb_to_verb',
     'Complex object: Verb (+ object) + to V': 'complex_object_v',
     'Verb + V-ing or to V': 'verb_ving_to_v',
     'Preposition (in/for/about etc.) + V-ing': 'preposition_in_for_about_etc',
@@ -89,7 +90,9 @@ dict_of_topics = {
     'Subjunctive mood/ unreal wishes(i wish)': 'subjunctive_mood_unreal_wishes',
     'Conditional sentences': 'conditional_sentence',
     'Give the right definition/synonym/antonym etc': 'give_right_definition_synonym',
-
+    'Test 2019': 'test_2019',
+    'Test 2020': 'test_2020',
+    'Test 2021': 'test_2021',
 
 }
 
@@ -101,7 +104,6 @@ list_of_topics.extend(dict_of_topics.values())
 topic_for_admins = ['bаck']
 topic_for_admins.extend(dict_of_topics.values())
 
-
 # bellow are data for topics
 list_nouns = ['🔙back', 'Nouns', 'Compound nouns',
               'Forming the possessive form of nouns']
@@ -109,7 +111,6 @@ list_nouns = ['🔙back', 'Nouns', 'Compound nouns',
 list_articles = ['🔙back', 'Indefinite article a/an', 'Definite article the',
                  'Articles with nouns in set expressions',
                  'Articles with common nouns', 'Articles with proper nouns']
-
 
 list_pronouns = ['🔙back', 'Personal/Objective Pronouns', 'Possessive pronouns',
                  'Reflexive pronoun', 'Demonstrative nouns',
@@ -165,8 +166,15 @@ list_completions = ['🔙back', 'Sentence completion', 'Dialogue Completion',
 list_gap_filling = ['🔙back', 'Gap filling(right form of the verb)', 'Gap filling(mixed:nouns, verb, Preposition etc)',
                     'Gap filling(choose the right part of speech)']
 
+more = ['🔙back', 'Numerals',
+        'Subjunctive mood/ unreal wishes(i wish)',
+        'Conditional sentences',
+        'Give the right definition/synonym/antonym etc']
+
+years = ['🔙back', 'Test 2019', 'Test 2020', 'Test 2021']
 
 dict_nov_bar = {
+    'Tests by years': years,
     'Nouns💡': list_nouns,
     'Articles': list_articles,
     'Pronouns': list_pronouns,
@@ -180,7 +188,8 @@ dict_nov_bar = {
     'Tag questions': list_tag,
     'Clauses': list_clauses,
     'Conjunction and Preposition': list_conjunction_preposition,
-    'Gap filling': list_gap_filling
+    'Gap filling': list_gap_filling,
+    'More⬇️': more
 
 }
 
