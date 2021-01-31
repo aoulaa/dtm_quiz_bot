@@ -31,19 +31,35 @@ async def get_all_rating(msg: types.Message):
     await msg.answer(text)
 
 
-# counting ratings
+# counting ratings of one user
 async def my_rating(users, user_id):
     text = ''
     for num, usr in enumerate(users, 1):
         if usr.id == user_id:
-            text += f'{num}) {usr.name} {usr.rating}💎\n'
+            text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
     return text
 
 
+# counting ratings of many users
 async def all_ratings(users):
     text = ''
 
     for num, usr in enumerate(users, 1):
-        text += f'{num}) {usr.name} {usr.rating}💎\n'
+        text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
         if num == 10:
             return text
+
+
+# admin ratings
+@dp.message_handler(text='Rating 📊')
+async def get_all_rating_admins(msg: types.Message):
+    users = await commands.select_all_admins()
+    text = await all_ratings_admin(users)
+    await msg.answer(text)
+
+
+async def all_ratings_admin(users):
+    text = ''
+    for num, usr in enumerate(users, 1):
+        text += f'{num}) {usr.name} added <b>{usr.admin_stats}</b> questions.\n'
+    return text

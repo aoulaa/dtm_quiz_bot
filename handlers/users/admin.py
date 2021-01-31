@@ -102,10 +102,14 @@ async def save_send_db(msg: types, state: FSMContext):
 
 @dp.callback_query_handler(state=Admin.ready_to_add, text=['add_db', 'cancel'])
 async def confirm(call: CallbackQuery, state: FSMContext):
+
+    id_user = call.from_user.id
     data = await state.get_data()
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     buttons = ["back", data['topic_name']]
     keyboard.add(*buttons)
+    usr = await commands.select_user(id_user)
+    admin_stats = usr.admin_stats
     if call.data == 'add_db':
         await commands.add_question(data['topic_name'], data['question'],
                                     data['right_answer'], data['wrong_answer'],
@@ -113,12 +117,15 @@ async def confirm(call: CallbackQuery, state: FSMContext):
 
         await call.message.delete()
         await call.message.answer('Question is added✅', reply_markup=keyboard)
+        admin_stats += 1
         await Admin.add_topic.set()
 
     elif call.data == 'cancel':
         await call.message.delete()
         await call.message.answer('Question is cancelled', reply_markup=keyboard)
         await Admin.add_topic.set()
+    await commands.update_admin_stats(id_user, admin_stats)
+    print(admin_stats)
 
 
 # for admin only to add new contributors
@@ -168,3 +175,9 @@ async def removing_con(msg: types.Message, state: FSMContext):
         await state.finish()
     else:
         await msg.answer('Please choose ID from the list above, you would like to delete')
+
+
+@dp.message_handler(user_id=admins, commands=['getuser'])
+async def number(message: types.message):
+    count = await commands.count_users()
+    await message.answer(f'каличство усеров: {count}')

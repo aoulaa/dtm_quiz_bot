@@ -34,9 +34,9 @@ async def send_present_q(message: types.Message, state: FSMContext):
     text_1 = 'Choose the correct answer'
     text_2 = questions_by_topic[0].explanation
     if text_2 is not None:
-        text = f'{text_2}.\n\n{questions_by_topic[0].questions}'
+        text = f'<b>{text_2}</b>\n\n{questions_by_topic[0].questions}'
     else:
-        text = f'{text_1}.\n\n{questions_by_topic[0].questions}'
+        text = f'<b>{text_1}</b>\n\n{questions_by_topic[0].questions}'
     await message.answer(text=text, reply_markup=answer_kb(answers, questions_by_topic[0].id))
     # В последнюю очередь отправляем сам вопрос с кнопками. По-хорошему надо бы записывать номер этого сообщения
     # для последующего удаления, оставлю это тебе, это необязательно.
@@ -70,9 +70,9 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     text_1 = 'Choose the correct answer'
     text_2 = all_question[0].explanation
     if text_2 is not None:
-        text = f'{text_2}.\n\n{all_question[0].questions}'
+        text = f'<b>{text_2}</b>\n\n{all_question[0].questions}'
     else:
-        text = f'{text_1}.\n\n{all_question[0].questions}'
+        text = f'<b>{text_1}</b>\n\n{all_question[0].questions}'
     await call.message.answer(text=text, reply_markup=answer_kb(answers, all_question[0].id))
     # В конце посылаем новый вопрос.
 
@@ -90,7 +90,8 @@ async def make_summary(id_user, answered):  # функция подсчет ст
         count += 1
         text += f'{question.questions} ❌ ({question.right_answer})\n\n' \
             if question.right_answer != value \
-            else f'{question.questions} ✔️\n\n'
+            else f'{question.questions} ✔ ({question.right_answer}) \n\n'
+
         if question.right_answer == value:
             rating += 1
             score += 1
@@ -100,7 +101,6 @@ async def make_summary(id_user, answered):  # функция подсчет ст
             stats[key] += 1
     await commands.update_user_stats(id_user, json.dumps(stats))
     await commands.update_rating(id_user, rating)
-
     text += f"<b>Out of {count}/{str(score)}</b>"
     ready_text = f'<b>Theme:</b> {question.topic}\n\n{text}'
     return ready_text

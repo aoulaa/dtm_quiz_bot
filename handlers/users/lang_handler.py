@@ -5,7 +5,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
-from keyboards.inline.in_buttons import languages_markup
+from keyboards.inline.in_buttons import languages_markup, languages_markup2
 from loader import dp, _
 from utils.db_api import commands
 
@@ -79,7 +79,11 @@ async def change_language(call: CallbackQuery):
               ],
         align=[1, 2]
     ).reply_keyboard
-    text = _("Ваш язык был изменен, вы находитесь в главном меню", locale=lang)
+    if '2' not in call.data:
+        text = _('Добро пожаловать, надеюсь тебе тут понравится.', locale=lang)
+    else:
+        text = _("Ваш язык был изменен, вы находитесь в главном меню", locale=lang)
+
     await call.message.answer(text,
                               reply_markup=menu)
 
@@ -88,4 +92,4 @@ async def change_language(call: CallbackQuery):
 async def bot_language(message: types.Message, state: FSMContext):
     await state.reset_state()
     await message.answer(_('Хотите изменить язык?'),
-                         reply_markup=languages_markup)
+                         reply_markup=languages_markup2)

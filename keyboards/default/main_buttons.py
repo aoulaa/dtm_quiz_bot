@@ -12,7 +12,8 @@ main_menu_buttons = ReplyKeyboardMarkup(
 
 admin_button = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="Add new questions")]
+        [KeyboardButton(text="Add new questions")],
+        [KeyboardButton(text="Rating 📊")]
     ],
     resize_keyboard=True
 )
@@ -20,6 +21,7 @@ admin_button = ReplyKeyboardMarkup(
 description = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="Choose the correct answer")]
+
     ],
     resize_keyboard=True,
     one_time_keyboard=True

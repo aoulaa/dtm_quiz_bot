@@ -1,14 +1,28 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
+# def answer_kb(answers, question_id):
+#     answer_buttons = [InlineKeyboardButton(text=answer, callback_data=(answer + ';' + str(question_id))) for answer in
+#                       answers]
+#
+#     kb = InlineKeyboardMarkup(row_width=1, inline_keyboard=[
+#         answer_buttons
+#     ],
+#     )
+#
+#     return kb
+
+
 def answer_kb(answers, question_id):
-    answer_buttons = [InlineKeyboardButton(text=answer, callback_data=(answer + ';' + str(question_id))) for answer in
-                      answers]
-    kb = InlineKeyboardMarkup(inline_keyboard=[
-        answer_buttons
-    ]
+    keyboard = InlineKeyboardMarkup()
+    [keyboard.add(
+        InlineKeyboardButton(
+            text=answer,
+            callback_data=f"{answer};{question_id}"
+        )
     )
-    return kb
+        for answer in answers]
+    return keyboard
 
 
 add_to_db = InlineKeyboardMarkup(
@@ -23,14 +37,23 @@ add_to_db = InlineKeyboardMarkup(
 )
 
 languages_markup = InlineKeyboardMarkup(
-        inline_keyboard=
+    inline_keyboard=
+    [
         [
-            [
-                InlineKeyboardButton(text="Русский🇷🇺", callback_data="lang_ru")],
-            [
-                InlineKeyboardButton(text="Uzbek🇺🇿", callback_data="lang_uz"),
-            ]
+            InlineKeyboardButton(text="Русский🇷🇺", callback_data="lang_ru")],
+        [
+            InlineKeyboardButton(text="Uzbek🇺🇿", callback_data="lang_uz"),
         ]
-    )
+    ]
+)
 
-
+languages_markup2 = InlineKeyboardMarkup(
+    inline_keyboard=
+    [
+        [
+            InlineKeyboardButton(text="Русский🇷🇺", callback_data="lang2_ru")],
+        [
+            InlineKeyboardButton(text="Uzbek🇺🇿", callback_data="lang2_uz"),
+        ]
+    ]
+)

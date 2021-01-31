@@ -10,11 +10,11 @@ from loader import dp, _
 
 @dp.message_handler(CommandHelp(), state="*")
 async def bot_help(message: types.Message):
-    text = (_("Список команд: ",
-              "/start - Начать диалог",
+    text = (_("Список команд: \n"
+              "/start - Начать диалог\n"
               "/restart - Если что-то пойдет не так"))
 
-    await message.answer("\n".join(text))
+    await message.answer(text)
 
 
 @dp.message_handler(Command(['restart']), state="*")
