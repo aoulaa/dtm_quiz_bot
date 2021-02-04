@@ -44,7 +44,6 @@ async def send_present_q(message: types.Message, state: FSMContext):
 
 @dp.callback_query_handler(state=Data.present_data)
 async def get_answer(call: CallbackQuery, state: FSMContext):
-
     await call.message.delete()
     answer, q_id = call.data.split(';')  # тут получаем коллбек дату и сразу распаковываем ее в ID и ответ.
     data = await state.get_data()  # Получаем данные из FSM
@@ -53,7 +52,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     all_question = data.get('questions_all')
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
 
-    if len(answered.keys()) == 5:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
+    if len(answered.keys()) == 20:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(id_user, answered)
         await state.reset_state(with_data=False)
         await call.message.answer(summary)
@@ -67,13 +66,16 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     answers = all_question[0].wrong_answer.split(',')
     answers.append(all_question[0].right_answer)
     random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
+    print(answers)
     text_1 = 'Choose the correct answer'
     text_2 = all_question[0].explanation
     if text_2 is not None:
         text = f'<b>{text_2}</b>\n\n{all_question[0].questions}'
     else:
         text = f'<b>{text_1}</b>\n\n{all_question[0].questions}'
+
     await call.message.answer(text=text, reply_markup=answer_kb(answers, all_question[0].id))
+    print(all_question[0].id)
     # В конце посылаем новый вопрос.
 
 
@@ -85,12 +87,12 @@ async def make_summary(id_user, answered):  # функция подсчет ст
     usr = await commands.select_user(id_user)
     stats = json.loads(usr.stats)
     rating = usr.rating
-    for key, value in answered.items():
+    for num, (key, value) in enumerate(answered.items(), 1):
         question = await commands.select_questions(int(key))
         count += 1
-        text += f'{question.questions} ❌ ({question.right_answer})\n\n' \
+        text += f'{num}. {question.questions} ❌ ({question.right_answer})\n\n' \
             if question.right_answer != value \
-            else f'{question.questions} ✅ ({question.right_answer}) \n\n'
+            else f'{num}. {question.questions} ✅ ({question.right_answer}) \n\n'
 
         if question.right_answer == value:
             rating += 1
@@ -106,7 +108,7 @@ async def make_summary(id_user, answered):  # функция подсчет ст
     return ready_text
 
 
-async def get_best_questions(id_user, topic, num=5):
+async def get_best_questions(id_user, topic, num=20):
     questions = await commands.select_question_by_topic(topic)
     questions_ids = [q.id for q in questions]  # Генерируем список ID вопросов для дальнейшей обработки.
     usr = await commands.select_user(id_user)
@@ -125,4 +127,3 @@ async def get_best_questions(id_user, topic, num=5):
                       if str(best_q.id) in best_questions_ids]  # Немного магии от
     # генератора списка. Тут получаем объекты вопросов, которые встречались реже всего.
     return best_questions
-

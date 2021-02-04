@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
 
 from data.dict_pack import main_topic, topic_for_admins
-from keyboards.default.main_buttons import main_menu_buttons, admin_button, genrate_button
+from keyboards.default.main_buttons import main_menu_buttons, admin_button, generate_button
 from keyboards.inline.in_buttons import languages_markup
 from loader import dp, _
 from states import Admin
@@ -39,7 +39,7 @@ async def get_to_tests(msg: types.Message, state: FSMContext):
 async def go_back_to_menu(message: types.Message, state: FSMContext):
     await state.reset_state()
     await message.answer('back to topics',
-                         reply_markup=genrate_button(topic_for_admins, False))
+                         reply_markup=generate_button(topic_for_admins, False))
     await Admin.add_topic.set()
 
 
@@ -54,4 +54,4 @@ async def go_back_to_menu(message: types.Message, state: FSMContext):
 async def back_to_main_topic(msg: types.Message, state: FSMContext):
     await state.reset_state()
     await msg.answer(_('выберите другую тему'),
-                     reply_markup=genrate_button(main_topic, False))
+                     reply_markup=generate_button(main_topic, False))

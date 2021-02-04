@@ -18,15 +18,6 @@ admin_button = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-description = ReplyKeyboardMarkup(
-    keyboard=[
-        [KeyboardButton(text="Choose the correct answer")]
-
-    ],
-    resize_keyboard=True,
-    one_time_keyboard=True
-)
-
 con_buttons = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text='add con')],
@@ -44,7 +35,7 @@ rating_buttons = ReplyKeyboardMarkup(
 )
 
 
-def genrate_button(buttons, key):
+def generate_button(buttons, key):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=key)
     keyboard.add(*buttons)
     return keyboard

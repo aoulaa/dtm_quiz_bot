@@ -1,7 +1,9 @@
 
 # for users to get questions from DB
 dict_of_topics = {
-    'Test2021': 'test_2021',
+    'Test 2019': 'test_2019',
+    'Test 2020': 'test_2020',
+    'Test 2021': 'test_2021',
     'Nouns': 'noun',
     'Compound nouns': 'compound_nouns',
     'Forming the possessive form of nouns': 'form_possessive_nouns',
@@ -89,11 +91,7 @@ dict_of_topics = {
     'Numerals': 'numerals',
     'Subjunctive mood/ unreal wishes(i wish)': 'subjunctive_mood_unreal_wishes',
     'Conditional sentences': 'conditional_sentence',
-    'Give the right definition/synonym/antonym etc': 'give_right_definition_synonym',
-    'Test 2019': 'test_2019',
-    'Test 2020': 'test_2020',
-    'Test 2021': 'test_2021',
-
+    'Give the right definition/synonym/antonym etc': 'give_right_definition_synonym'
 }
 
 # for admins to check if the topic they want to add question does exist
@@ -172,7 +170,7 @@ more = ['🔙back', 'Numerals',
         'Give the right definition/synonym/antonym etc']
 
 years = ['🔙back', 'Test 2019', 'Test 2020', 'Test 2021']
-
+# for buttons
 dict_nov_bar = {
     'Tests by years': years,
     'Nouns💡': list_nouns,
@@ -192,8 +190,11 @@ dict_nov_bar = {
     'More⬇️': more
 
 }
-
+# dict for user interface
 main_topic = [
     '⬅️back',
 ]
 main_topic.extend(dict_nov_bar.keys())
+
+# lists for questions discription
+list_of_explain = ['Choose the correct answer.', ]

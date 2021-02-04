@@ -1,5 +1,6 @@
 from aiogram import types
 
+from data.config import contributor
 from keyboards.default.main_buttons import rating_buttons
 
 from loader import dp, _
@@ -43,11 +44,11 @@ async def my_rating(users, user_id):
 # counting ratings of many users
 async def all_ratings(users):
     text = ''
-
     for num, usr in enumerate(users, 1):
-        text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
-        if num == 10:
-            return text
+
+        if num <= 10:
+            text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
+    return text
 
 
 # admin ratings
@@ -61,5 +62,6 @@ async def get_all_rating_admins(msg: types.Message):
 async def all_ratings_admin(users):
     text = ''
     for num, usr in enumerate(users, 1):
-        text += f'{num}) {usr.name} added <b>{usr.admin_stats}</b> questions.\n'
+        if usr.id in contributor:
+            text += f'{num}) {usr.name} added <b>{usr.admin_stats}</b> questions.\n'
     return text

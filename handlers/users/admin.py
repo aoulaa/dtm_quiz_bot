@@ -1,8 +1,8 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
-from data.dict_pack import list_of_topics, topic_for_admins
-from keyboards.default.main_buttons import admin_button, description, con_buttons, genrate_button
+from data.dict_pack import list_of_topics, topic_for_admins, list_of_explain
+from keyboards.default.main_buttons import admin_button, con_buttons, generate_button
 from keyboards.inline.in_buttons import add_to_db
 
 from states import Admin
@@ -26,7 +26,7 @@ from data.config import contributor, admins
 #
 #     await msg.answer(text)
 
-
+# for admins to add questions
 @dp.message_handler(IsPrivate(), commands='add_question')
 async def add_question(msg: types.Message):
     id = msg.from_user.id
@@ -41,7 +41,7 @@ async def add_question(msg: types.Message):
 @dp.message_handler(user_id=contributor, text='Add new questions', state="*")
 async def chose_topic(msg: types):
     await msg.answer('Choose the topic you want to add questions to',
-                     reply_markup=genrate_button(topic_for_admins, True))
+                     reply_markup=generate_button(topic_for_admins, True))
     await Admin.add_topic.set()
 
 
@@ -76,14 +76,15 @@ async def save_right_answer(msg: types, state: FSMContext):
 async def save_question_dis(msg: types, state: FSMContext):
     wrong_answer = msg.text
     await state.update_data(wrong_answer=wrong_answer)
-    await msg.answer('Send task description or choose below',
-                     reply_markup=description)
+    await msg.answer('Send task description or choose below⬇',
+                     reply_markup=generate_button(list_of_explain, True))
     await Admin.question_dis.set()
 
 
 @dp.message_handler(state=Admin.question_dis)
 async def save_send_db(msg: types, state: FSMContext):
     description = msg.text
+
     await state.update_data(description=description)
     data = await state.get_data()
     topic_name = data.get("topic_name")
@@ -114,7 +115,8 @@ async def confirm(call: CallbackQuery, state: FSMContext):
         await commands.add_question(data['topic_name'], data['question'],
                                     data['right_answer'], data['wrong_answer'],
                                     data['description'])
-
+        if data['description'] not in list_of_explain:
+            list_of_explain.append(data['description'])
         await call.message.delete()
         await call.message.answer('Question is added✅', reply_markup=keyboard)
         admin_stats += 1
