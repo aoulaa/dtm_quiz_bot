@@ -52,7 +52,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     all_question = data.get('questions_all')
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
 
-    if len(answered.keys()) == 20:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
+    if len(answered.keys()) == 5:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(id_user, answered)
         await state.reset_state(with_data=False)
         await call.message.answer(summary)
@@ -108,7 +108,7 @@ async def make_summary(id_user, answered):  # функция подсчет ст
     return ready_text
 
 
-async def get_best_questions(id_user, topic, num=20):
+async def get_best_questions(id_user, topic, num=5):
     questions = await commands.select_question_by_topic(topic)
     questions_ids = [q.id for q in questions]  # Генерируем список ID вопросов для дальнейшей обработки.
     usr = await commands.select_user(id_user)
