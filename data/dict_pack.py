@@ -1,5 +1,5 @@
-
 # for users to get questions from DB
+
 dict_of_topics = {
     '⬅️back': '⬅️back',
     'Test 2021 📑': 'test_2021',
@@ -31,17 +31,25 @@ dict_of_topics = {
 
 }
 
-list_of_explain = ['Choose the correct answer.', ]
+main_dict = dict_of_topics.copy()
+main_dict.pop('⬅️back')
+
 
 # for admins to check if the topic they want to add question does exist
+
 list_of_topics = []
-list_of_topics.extend(dict_of_topics.values())
+list_of_topics.extend(main_dict.values())
 
 # for admins to choose from topics
+
 topic_for_admins = ['bаck']
-topic_for_admins.extend(dict_of_topics.values())
+topic_for_admins.extend(main_dict.values())
 
 
+# for admins
+
+
+list_of_explain = ['Choose the correct answer.', ]
 
 
 
