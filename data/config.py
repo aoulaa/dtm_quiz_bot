@@ -19,6 +19,11 @@ contributor = [
     1079453114,
     61888314
 ]
+
+channels = [
+ '@aoulaatest'
+]
+
 ip = os.getenv("ip")
 
 db_host = ip  # Если вы запускаете базу не через докер!
