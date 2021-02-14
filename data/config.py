@@ -21,7 +21,7 @@ contributor = [
 ]
 
 channels = [
- '@aoulaatest'
+ '@Grammar_Vocabulary_Eng'
 ]
 
 ip = os.getenv("ip")

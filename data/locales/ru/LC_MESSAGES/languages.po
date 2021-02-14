@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-31 17:41+0500\n"
+"POT-Creation-Date: 2021-02-14 23:09+0500\n"
 "PO-Revision-Date: 2021-01-27 21:48+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -30,12 +30,12 @@ msgstr ""
 msgid "упсс все норм ?"
 msgstr ""
 
-#: handlers/users/lang_handler.py:76 handlers/users/nav_handler.py:8
+#: handlers/users/lang_handler.py:76 handlers/users/nav_handler.py:10
 #: keyboards/default/main_buttons.py:6
 msgid "🧠 Заниматься"
 msgstr ""
 
-#: handlers/users/lang_handler.py:77 handlers/users/rating.py:10
+#: handlers/users/lang_handler.py:77 handlers/users/rating.py:11
 #: keyboards/default/main_buttons.py:7
 msgid "📊 Рейтинг"
 msgstr ""
@@ -57,15 +57,17 @@ msgstr ""
 msgid "Хотите изменить язык?"
 msgstr ""
 
-#: handlers/users/nav_handler.py:11
+#: handlers/users/nav_handler.py:18
 msgid "Выбери тему и начни попрактиковаться"
 msgstr ""
 
-#: handlers/users/nav_handler.py:17
-msgid "Выбери тему"
+#: handlers/users/nav_handler.py:22
+msgid ""
+"Чтобы попрактиковаться <a href='{}'>Нужно подписаться на канал.</a>\n"
+"\n"
 msgstr ""
 
-#: handlers/users/rating.py:12
+#: handlers/users/rating.py:13
 msgid ""
 "Это рейтинг игроков.\n"
 "Выполняй тесты каждый день и получай рейтинговые очки!\n"
@@ -73,30 +75,26 @@ msgid ""
 "Здесь ты можешь увидеть на каком ты месте и в какой лиге сейчас:"
 msgstr ""
 
-#: handlers/users/rating.py:19 keyboards/default/main_buttons.py:38
+#: handlers/users/rating.py:20 keyboards/default/main_buttons.py:31
 msgid "🕴 Мой рейтинг"
 msgstr ""
 
-#: handlers/users/rating.py:27 keyboards/default/main_buttons.py:38
+#: handlers/users/rating.py:28 keyboards/default/main_buttons.py:31
 msgid "🌎 Топ 10"
 msgstr ""
 
-#: handlers/users/start.py:25
+#: handlers/users/start.py:26
 msgid ""
 "Привет, {}!\n"
 "Я тебя хорошо знаю что сегодня будем делать?"
 msgstr ""
 
-#: handlers/users/start.py:30 keyboards/default/main_buttons.py:39
+#: handlers/users/start.py:31 keyboards/default/main_buttons.py:32
 msgid "⬅ назад"
 msgstr ""
 
-#: handlers/users/start.py:32
+#: handlers/users/start.py:33
 msgid "вы в главном меню"
-msgstr ""
-
-#: handlers/users/start.py:55
-msgid "выберите другую тему"
 msgstr ""
 
 #~ msgid "Выбери выбери тему"

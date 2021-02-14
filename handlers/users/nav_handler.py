@@ -19,14 +19,9 @@ async def navigation(msg: types.Message):
                              reply_markup=generate_button(dict_of_topics, False))
         else:
             invite_link = await channel.export_invite_link()
-            result += f"Чтобы попрактиковаться <a href='{invite_link}'>Нужно подписаться на канал.</a>\n\n"
+            result += _("Чтобы попрактиковаться <a href='{}'>Нужно подписаться на канал.</a>\n\n").format(invite_link)
 
     await msg.answer(result, disable_web_page_preview=True)
 
 
 
-
-# @dp.message_handler(text=dict_nov_bar)
-# async def dict_nov(msg: types.Message):
-#     await msg.answer(_('Выбери тему'),
-#                      reply_markup=generate_button(dict_nov_bar[msg.text], False))
