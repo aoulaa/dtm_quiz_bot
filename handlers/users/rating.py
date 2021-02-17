@@ -37,7 +37,7 @@ async def my_rating(users, user_id):
     text = ''
     for num, usr in enumerate(users, 1):
         if usr.id == user_id:
-            text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
+            text += f'{num}) {usr.name} <b>{usr.rating}</b> 💎\n'
     return text
 
 
@@ -45,9 +45,8 @@ async def my_rating(users, user_id):
 async def all_ratings(users):
     text = ''
     for num, usr in enumerate(users, 1):
-
         if num <= 10:
-            text += f'{num}) {usr.name} <b>{usr.rating}</b>💎\n'
+            text += f'{num}) {usr.name} <b>{usr.rating}</b> 💎\n'
     return text
 
 

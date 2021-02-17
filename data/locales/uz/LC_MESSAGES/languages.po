@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-01-31 17:41+0500\n"
+"POT-Creation-Date: 2021-02-14 23:09+0500\n"
 "PO-Revision-Date: 2021-01-27 21:47+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
@@ -32,12 +32,12 @@ msgstr ""
 msgid "упсс все норм ?"
 msgstr "Nimadir buldmi ?"
 
-#: handlers/users/lang_handler.py:76 handlers/users/nav_handler.py:8
+#: handlers/users/lang_handler.py:76 handlers/users/nav_handler.py:10
 #: keyboards/default/main_buttons.py:6
 msgid "🧠 Заниматься"
 msgstr "🧠 Shug'ilanish"
 
-#: handlers/users/lang_handler.py:77 handlers/users/rating.py:10
+#: handlers/users/lang_handler.py:77 handlers/users/rating.py:11
 #: keyboards/default/main_buttons.py:7
 msgid "📊 Рейтинг"
 msgstr "📊 Reyting"
@@ -59,15 +59,17 @@ msgstr "Tilingiz o'zgartirildi, siz asosiy menyuda turibsiz"
 msgid "Хотите изменить язык?"
 msgstr "Tilni o'zgartirishni xoxlaysizmi"
 
-#: handlers/users/nav_handler.py:11
+#: handlers/users/nav_handler.py:18
 msgid "Выбери тему и начни попрактиковаться"
 msgstr "Mavzuni tanlang va mashq qilishni boshlang"
 
-#: handlers/users/nav_handler.py:17
-msgid "Выбери тему"
-msgstr "Mavzuni tanlang"
+#: handlers/users/nav_handler.py:22
+msgid ""
+"Чтобы попрактиковаться <a href='{}'>Нужно подписаться на канал.</a>\n"
+"\n"
+msgstr "Shug'ullanishni boshlash uchun <a href='{}'>Kanalimizga obuna buling.</a>\n"
 
-#: handlers/users/rating.py:12
+#: handlers/users/rating.py:13
 msgid ""
 "Это рейтинг игроков.\n"
 "Выполняй тесты каждый день и получай рейтинговые очки!\n"
@@ -80,31 +82,27 @@ msgstr ""
 "Bu erda siz qaerda ekanligingizni va hozir qaysi ligada ekanligingizni "
 "ko'rishingiz mumkin:"
 
-#: handlers/users/rating.py:19 keyboards/default/main_buttons.py:38
+#: handlers/users/rating.py:20 keyboards/default/main_buttons.py:31
 msgid "🕴 Мой рейтинг"
 msgstr "🕴 Mening reytingim"
 
-#: handlers/users/rating.py:27 keyboards/default/main_buttons.py:38
+#: handlers/users/rating.py:28 keyboards/default/main_buttons.py:31
 msgid "🌎 Топ 10"
 msgstr "🌎 Top 10"
 
-#: handlers/users/start.py:25
+#: handlers/users/start.py:26
 msgid ""
 "Привет, {}!\n"
 "Я тебя хорошо знаю что сегодня будем делать?"
 msgstr "Salom {}!  Men sizni yaxshi bilaman, bugun nima qilamiz?"
 
-#: handlers/users/start.py:30 keyboards/default/main_buttons.py:39
+#: handlers/users/start.py:31 keyboards/default/main_buttons.py:32
 msgid "⬅ назад"
 msgstr "⬅ ortga"
 
-#: handlers/users/start.py:32
+#: handlers/users/start.py:33
 msgid "вы в главном меню"
 msgstr "Siz asosiy menyuda"
-
-#: handlers/users/start.py:55
-msgid "выберите другую тему"
-msgstr "boshqa mavzuni tanlang"
 
 #~ msgid "🧠 Заниматься"
 #~ msgstr "🧠 Shug'ilanish"
@@ -147,7 +145,7 @@ msgstr "boshqa mavzuni tanlang"
 #~ msgstr "Siz asosiy menyuda"
 
 #~ msgid "выберите другую тему"
-#~ msgstr "Boshqa mavzuni tanlang"
+#~ msgstr "boshqa mavzuni tanlang"
 
 #~ msgid "Список команд: \n"
 #~ msgstr "Buyruqlar ro'yxati:"

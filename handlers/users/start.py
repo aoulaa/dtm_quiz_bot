@@ -4,7 +4,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from data.dict_pack import main_topic, topic_for_admins
+from data.dict_pack import topic_for_admins
 from keyboards.default.main_buttons import main_menu_buttons, admin_button, generate_button
 from keyboards.inline.in_buttons import languages_markup
 from loader import dp, _
@@ -50,8 +50,8 @@ async def go_back_to_menu(message: types.Message, state: FSMContext):
                          reply_markup=admin_button)
 
 
-@dp.message_handler(text='🔙back', state="*")
-async def back_to_main_topic(msg: types.Message, state: FSMContext):
-    await state.reset_state()
-    await msg.answer(_('выберите другую тему'),
-                     reply_markup=generate_button(main_topic, False))
+# @dp.message_handler(text='🔙back', state="*")
+# async def back_to_main_topic(msg: types.Message, state: FSMContext):
+#     await state.reset_state()
+#     await msg.answer(_('выберите другую тему'),
+#                      reply_markup=generate_button(main_topic, False))
