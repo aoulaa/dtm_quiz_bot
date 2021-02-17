@@ -1,4 +1,5 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import random
 
 
 # def answer_kb(answers, question_id):
@@ -14,14 +15,16 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 def answer_kb(answers, question_id):
+    nums = list(answers.keys())
+    random.shuffle(nums)
     keyboard = InlineKeyboardMarkup()
     [keyboard.add(
         InlineKeyboardButton(
-            text=answer,
-            callback_data=f"{answer};{question_id}"
+            text=answers[num],
+            callback_data=f"{num};{question_id}"
         )
     )
-        for answer in answers]
+        for num in nums]
     return keyboard
 
 

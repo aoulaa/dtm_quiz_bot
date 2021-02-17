@@ -19,7 +19,6 @@ from operator import itemgetter
 @dp.message_handler(text=dict_of_topics, state="*")
 async def send_present_q(message: types.Message, state: FSMContext):
     id_user = message.from_user.id
-
     await state.update_data(id=id_user)
     questions_by_topic = await get_best_questions(id_user, dict_of_topics[message.text])
     await state.update_data(questions_all=questions_by_topic)  # А тут обновляем данные в FSM
@@ -30,14 +29,18 @@ async def send_present_q(message: types.Message, state: FSMContext):
     answers = questions_by_topic[0].wrong_answer.split(',')
     # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
     answers.append(questions_by_topic[0].right_answer)
-    random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
+    last_q_dict = {}
+    for num, ans in enumerate(answers): # Готовим словарь с ответами - нужно для обхода ограничений cb_data
+        last_q_dict[num] = ans
+    await state.update_data(last_question_dict=last_q_dict)
+    # random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
     text_1 = 'Choose the correct answer'
     text_2 = questions_by_topic[0].explanation
     if text_2 is not None:
         text = f'<b>{text_2}</b>\n\n{questions_by_topic[0].questions}'
     else:
         text = f'<b>{text_1}</b>\n\n{questions_by_topic[0].questions}'
-    await message.answer(text=text, reply_markup=answer_kb(answers, questions_by_topic[0].id))
+    await message.answer(text=text, reply_markup=answer_kb(last_q_dict, questions_by_topic[0].id))
     # В последнюю очередь отправляем сам вопрос с кнопками. По-хорошему надо бы записывать номер этого сообщения
     # для последующего удаления, оставлю это тебе, это необязательно.
 
@@ -50,9 +53,12 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     id_user = data.get('id')
     answered = data.get('answered')
     all_question = data.get('questions_all')
+    previous_question_dict = data.get('last_question_dict')
+    answer = previous_question_dict[int(answer)]
+
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
 
-    if len(answered.keys()) == 20:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
+    if len(answered.keys()) == 4:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(id_user, answered)
         await state.reset_state(with_data=False)
         await call.message.answer(summary)
@@ -65,8 +71,13 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     await state.update_data(answered=answered)
     answers = all_question[0].wrong_answer.split(',')
     answers.append(all_question[0].right_answer)
-    random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
-    print(answers)
+
+    last_q_dict = {}
+    for num, ans in enumerate(answers):  # Готовим словарь с ответами - нужно для обхода ограничений cb_data
+        last_q_dict[num] = ans
+    await state.update_data(last_question_dict=last_q_dict)
+
+    # random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
     text_1 = 'Choose the correct answer'
     text_2 = all_question[0].explanation
     if text_2 is not None:
@@ -74,8 +85,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     else:
         text = f'<b>{text_1}</b>\n\n{all_question[0].questions}'
 
-    await call.message.answer(text=text, reply_markup=answer_kb(answers, all_question[0].id))
-    print(all_question[0].id)
+    await call.message.answer(text=text, reply_markup=answer_kb(last_q_dict, all_question[0].id))
     # В конце посылаем новый вопрос.
 
 
