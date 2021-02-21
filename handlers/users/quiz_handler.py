@@ -24,7 +24,6 @@ async def send_present_q(message: types.Message, state: FSMContext):
     await state.update_data(questions_all=questions_by_topic)  # А тут обновляем данные в FSM
     await state.update_data(answered={})  # Здесь создадим пустой словарь, в который позже запишем ответы
     await Data.present_data.set()
-
     random.shuffle(questions_by_topic)  # Мешаем вопросы, чтобы выдать случайный вопрос из списка
     answers = questions_by_topic[0].wrong_answer.split(',')
     # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
@@ -55,15 +54,12 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     all_question = data.get('questions_all')
     previous_question_dict = data.get('last_question_dict')
     answer = previous_question_dict[int(answer)]
-
     answered[q_id] = answer  # Записываем в словарь ответ на вопрос.
-
     if len(answered.keys()) == 4:  # Проерка числа отвеченных вопросов. Если больше этого числа - закончим квиз.
         summary = await make_summary(id_user, answered)
         await state.reset_state(with_data=False)
         await call.message.answer(summary)
         return
-
     while answered.get(
             str(all_question[0].id)):  # Тут рандомизируем список так, чтобы обращение к списку вопросов по [0]
         random.shuffle(all_question)  # возвращало вопрос, который еще не был задан пользователю.
@@ -71,7 +67,6 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     await state.update_data(answered=answered)
     answers = all_question[0].wrong_answer.split(',')
     answers.append(all_question[0].right_answer)
-
     last_q_dict = {}
     for num, ans in enumerate(answers):  # Готовим словарь с ответами - нужно для обхода ограничений cb_data
         last_q_dict[num] = ans
@@ -103,11 +98,9 @@ async def make_summary(id_user, answered):  # функция подсчет ст
         text += f'{num}. {question.questions} ❌ ({question.right_answer})\n\n' \
             if question.right_answer != value \
             else f'{num}. {question.questions} ✅ ({question.right_answer}) \n\n'
-
         if question.right_answer == value:
             rating += 1
             score += 1
-
             if not stats.get(key):
                 stats[key] = 0
             stats[key] += 1
