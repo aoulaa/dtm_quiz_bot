@@ -7,7 +7,7 @@ services:
 # ТО ЕСТЬ НЕ АЙПИШНИК И НЕ ЛОКАЛХОСТ, А db
     container_name: database
     image: sameersbn/postgresql:10-2
-     env_file:
+    env_file:
        - ".env"
     environment:
       PG_PASSWORD: $PGPASSWORD
