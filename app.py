@@ -1,6 +1,6 @@
 from utils.set_bot_commands import set_default_commands
 from loader import db
-from utils.db_api import db_gino, commands
+from utils.db_api import db_gino
 from aiogram import executor
 from utils.notify_admins import on_startup_notify
 from handlers import dp

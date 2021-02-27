@@ -10,6 +10,8 @@ PGUSER = str(os.getenv("PGUSER"))
 PGPASSWORD = str(os.getenv("PGPASSWORD"))
 DATABASE = str(os.getenv("DATABASE"))
 
+
+
 admins = [
     1079453114,
     # 61888314
@@ -43,4 +45,6 @@ BASE_DIR = Path(__file__).parent
 LOCALES_DIR = BASE_DIR / 'locales'
 
 POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{db_host}/{DATABASE}"
+
+
 

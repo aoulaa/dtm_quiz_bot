@@ -29,16 +29,10 @@ async def send_present_q(message: types.Message, state: FSMContext):
     # Получаем здесь ответы на вопросы, чтобы передать их в клавиатуре
     answers.append(questions_by_topic[0].right_answer)
     last_q_dict = {}
-    for num, ans in enumerate(answers): # Готовим словарь с ответами - нужно для обхода ограничений cb_data
+    for num, ans in enumerate(answers):  # Готовим словарь с ответами - нужно для обхода ограничений cb_data
         last_q_dict[num] = ans
     await state.update_data(last_question_dict=last_q_dict)
-    # random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
-    text_1 = 'Choose the correct answer'
-    text_2 = questions_by_topic[0].explanation
-    if text_2 is not None:
-        text = f'<b>{text_2}</b>\n\n{questions_by_topic[0].questions}'
-    else:
-        text = f'<b>{text_1}</b>\n\n{questions_by_topic[0].questions}'
+    text = await explanation_text(questions_by_topic)
     await message.answer(text=text, reply_markup=answer_kb(last_q_dict, questions_by_topic[0].id))
     # В последнюю очередь отправляем сам вопрос с кнопками. По-хорошему надо бы записывать номер этого сообщения
     # для последующего удаления, оставлю это тебе, это необязательно.
@@ -71,15 +65,7 @@ async def get_answer(call: CallbackQuery, state: FSMContext):
     for num, ans in enumerate(answers):  # Готовим словарь с ответами - нужно для обхода ограничений cb_data
         last_q_dict[num] = ans
     await state.update_data(last_question_dict=last_q_dict)
-
-    # random.shuffle(answers)  # Мешаем ответы для исключения возможности ответа по зрительной памяти
-    text_1 = 'Choose the correct answer'
-    text_2 = all_question[0].explanation
-    if text_2 is not None:
-        text = f'<b>{text_2}</b>\n\n{all_question[0].questions}'
-    else:
-        text = f'<b>{text_1}</b>\n\n{all_question[0].questions}'
-
+    text = await explanation_text(all_question)
     await call.message.answer(text=text, reply_markup=answer_kb(last_q_dict, all_question[0].id))
     # В конце посылаем новый вопрос.
 
@@ -130,3 +116,13 @@ async def get_best_questions(id_user, topic, num=20):
                       if str(best_q.id) in best_questions_ids]  # Немного магии от
     # генератора списка. Тут получаем объекты вопросов, которые встречались реже всего.
     return best_questions
+
+
+async def explanation_text(quetions_explanation):
+    text_1 = 'Choose the correct answer'
+    text_2 = quetions_explanation[0].explanation
+    if text_2 is not None:
+        text = f'<b>{text_2}</b>\n\n{quetions_explanation[0].questions}'
+    else:
+        text = f'<b>{text_1}</b>\n\n{quetions_explanation[0].questions}'
+    return text

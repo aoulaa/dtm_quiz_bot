@@ -1,3 +1,5 @@
+import json
+
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 
@@ -14,6 +16,23 @@ from loader import dp
 
 from data.config import contributor, admins
 
+#
+# async def on_shooting_down():
+#     with open('save_con.json', 'w') as write_file:
+#         json.dump(contributor, write_file)
+#     return
+#
+#
+# async def on_starting_up():
+#     with open('save_con.json', 'r') as read_file:
+#         con = json.load(read_file)
+#         json.dump(con, contributor)
+#     print(con)
+#     return
+#
+#
+# on_starting_up()
+
 
 # @dp.message_handler(text="backk", state="*")
 # async def go_back(msg: types.Message, state: FSMContext):
@@ -27,6 +46,8 @@ from data.config import contributor, admins
 #     await msg.answer(text)
 
 # for admins to add questions
+
+
 @dp.message_handler(IsPrivate(), commands='add_question')
 async def add_question(msg: types.Message):
     id = msg.from_user.id
@@ -103,7 +124,6 @@ async def save_send_db(msg: types, state: FSMContext):
 
 @dp.callback_query_handler(state=Admin.ready_to_add, text=['add_db', 'cancel'])
 async def confirm(call: CallbackQuery, state: FSMContext):
-
     id_user = call.from_user.id
     data = await state.get_data()
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -148,12 +168,11 @@ async def add_con(msg: types.Message, state: FSMContext):
 
 @dp.message_handler(state='add_con')
 async def adding_con(msg: types.Message, state: FSMContext):
-
     if not msg.text.isdigit():
         await msg.answer('Please send contributor\'s ID which should be digit')
     else:
         contributor.append(msg.text)
-        await msg.answer(f'<b>{msg.text}</b> is added to the list of contributors\n\n{contributor}')
+        await msg.answer(f'<b>{int(msg.text)}</b> is added to the list of contributors\n\n{contributor}')
         await state.finish()
 
 
@@ -167,7 +186,6 @@ async def remove_con(msg: types.Message, state: FSMContext):
 
 @dp.message_handler(state='remove_con')
 async def removing_con(msg: types.Message, state: FSMContext):
-
     if not msg.text.isdigit():
         await msg.answer('Please send contributor\'s ID which should be digit')
     elif msg.text in contributor:

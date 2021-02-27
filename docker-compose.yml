@@ -10,6 +10,7 @@ services:
     env_file:
        - ".env"
     environment:
+      PG_USER: $PGUSER
       PG_PASSWORD: $PGPASSWORD
     restart: always
     ports:
@@ -20,7 +21,7 @@ services:
       - ./postgres:/var/lib/postgresql
 
   tgbot:
-    container_name: bot
+    container_name: dtm_bot
     build:
       context: .
     command: python app.py
